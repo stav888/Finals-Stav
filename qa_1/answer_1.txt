@@ -1,0 +1,24 @@
+qa #1
+
+Question (from finals page — Q1):
+What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
+
+Expected: a list of tokens and a one-sentence explanation of what tokenization does and why it's the first step in NLP.
+
+Answer:
+
+Tokens:
+["I", "'m", "learning", "NLP", "in", "2025", "!"]
+
+One-sentence explanation:
+Tokenization splits raw text into discrete tokens (words, subwords, or punctuation) so NLP systems can process and analyze language; it's the first step because models require these discrete units instead of raw character strings.
+
+Sources (file links):
+- https://github.com/pythonai200425/pages_ai/blob/main/e_nlp/Ka-NLP-intro.md
+- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
+
+"""
+pages_ai/e_nlp/Ka-NLP-intro.md: Defines core NLP tasks and explicitly lists "Tokenization" (טוקניזציה) with a simple word-splitting example (e.g., "אני אוהב NLP" → ["אני","אוהב","NLP"]). Used as the source for the tokenization definition and example.
+
+pythonai200425.github.io/vector-db.html: Includes a "Token Slider", chunking calculator, and guidance to chunk text (~200–500 tokens with overlap) plus the text→embedding flow. Used as the source for chunking/token context and why tokenization is done before embedding.
+"""
