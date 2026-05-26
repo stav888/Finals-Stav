@@ -1,0 +1,26 @@
+qa #4
+
+Question (from finals page — Q4):
+What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't. Think about: what can you measure between two embeddings that you can't measure between two one-hot vectors?
+
+Expected: short explanation of embeddings vs one-hot and one concrete advantage (e.g., semantic similarity via distance/cosine).
+
+Answer:
+
+A sentence embedding is a fixed-length numeric vector that represents the semantic meaning of a sentence in a continuous vector space. Unlike a one-hot vector (which is sparse and only indicates presence/identity of exact tokens), embeddings capture semantic relationships: similar sentences map to nearby vectors.
+
+Concrete advantage:
+Embeddings let you measure semantic similarity (e.g., using cosine similarity or Euclidean distance) so you can find semantically related sentences even when they share no exact words — something one-hot vectors cannot do because one-hot representations are orthogonal for different tokens.
+
+One-sentence summary:
+Sentence embeddings map text to a continuous space where distance reflects semantic similarity; one-hot vectors cannot represent meaning or similarity beyond exact token identity.
+
+Sources (file links):
+- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
+- https://github.com/pythonai200425/pages_ai/blob/main/e_nlp/Ka-NLP-intro.md
+
+"""
+pythonai200425.github.io/vector-db.html: Explains embeddings, vector stores, and similarity search; used for the sentence-embedding definition and the distance/similarity intuition.
+
+pages_ai/e_nlp/Ka-NLP-intro.md: Course-level NLP overview; used to reinforce differences between sparse token encodings and dense semantic representations.
+"""

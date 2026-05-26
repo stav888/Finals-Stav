@@ -1,0 +1,23 @@
+qa #6
+
+Question (from finals page — Q6):
+Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't? Example to think about: "Italian food" and "pasta and risotto" — one contains the word, the other doesn't, but they're about the same topic.
+
+Expected: short explanation contrasting literal token matching vs semantic retrieval; mention vector index / nearest-neighbor search.
+
+Answer:
+
+A SQL `LIKE` query matches literal substrings and can only find documents containing the exact token(s) you search for. It cannot detect semantic similarity when different words express the same concept. A vector index stores dense embeddings for each document and supports nearest-neighbor search (using cosine similarity or other distance metrics), allowing retrieval of semantically similar documents even when they share few or no exact words. For example, embeddings for "Italian food" and "pasta and risotto" will be close in vector space and thus retrievable by a vector search even though the literal substring "pizza" may only appear in one.
+
+One-sentence summary:
+SQL `LIKE` is literal text matching; vector indexes enable semantic matching via nearest-neighbor search over embeddings.
+
+Sources (file links):
+- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
+- https://github.com/pythonai200425/pages_ai/blob/main/e_nlp/Ka-NLP-intro.md
+
+"""
+pythonai200425.github.io/vector-db.html: Explains embeddings, vector indexes and similarity search; used to support the semantic vs literal retrieval distinction and the example.
+
+pages_ai/e_nlp/Ka-NLP-intro.md: Course-level NLP overview; used for context about embeddings and semantic representations.
+"""

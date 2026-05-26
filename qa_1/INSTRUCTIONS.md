@@ -1,13 +1,17 @@
 # QA Authoring Instructions
 
-Use this file when adding more QA entries to this folder. Follow the exact format used in `answer.txt` so entries remain consistent and machine-readable.
+Use this file when adding more QA entries to this folder. Keep entries consistent and machine-readable so they can be processed automatically by scripts.
 
-Template (replace values):
+Goals
+- Keep one question per `answer_<n>.txt` file. Follow the template exactly.
+- Always include exact source blob URLs and a short extraction note per source.
+
+Template (replace values)
 
 qa #<n>
 
 Question (from finals page — Q<n>):
-<full question text>
+<full question text — copy exactly>
 
 Expected: <short expected format / hints>
 
@@ -19,45 +23,29 @@ Tokens:
 One-sentence explanation:
 <one concise sentence explaining the task or concept>
 
-Sources (file links):
-- https://github.com/pythonai200425/pages_ai/blob/main/e_nlp/Ka-NLP-intro.md
-- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
+Sources (file links — use GitHub blob URLs):
+- https://github.com/<owner>/<repo>/blob/<branch>/path/to/file.md
 
+Extraction notes (keep inside this HTML comment):
 <!--
-File-level sources and extraction notes (keep inside this HTML comment):
-- pages_ai/e_nlp/Ka-NLP-intro.md: 
-Defines core NLP tasks and explicitly lists "Tokenization" (טוקניזציה) with simple examples (word splitting). Use this for definitions and basic examples.
-
-- pythonai200425.github.io/vector-db.html: 
-Explains token/chunk handling in practical RAG pipelines (Token Slider, chunking calculator, chunk-size guidance ~200–500 tokens) and shows text → embedding flow. Use this for chunking guidance and pipeline rationale.
-
-When you write an answer, add these file paths under "Sources (file links)" and also include a short comment inside the HTML comment block above explaining what you extracted from each file.
+- path/to/file.md: one-line note describing what was extracted (definition, example, parameter values, recommended chunk size, etc.)
 -->
 
-Example (QA1 copied):
+Filename conventions
+- Use `answer_<n>.txt` for each question (e.g., `answer_1.txt`).
+- Keep `answer.txt` as a combined or legacy file only if needed; prefer per-question files.
 
-qa #1
+Source citation rules
+- Prefer `https://github.com/owner/repo/blob/main/path/to/file.md` (the blob URL) so reviewers can click directly to the source.
+- Add a one-line extraction note per source inside the HTML comment block (as shown above).
 
-Question (from finals page — Q1):
-What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
-Expected: a list of tokens and a one-sentence explanation of what tokenization does and why it's the first step in NLP.
-Answer:
+Quick checklist (before saving a new `answer_<n>.txt`)
+- [ ] File named `answer_<n>.txt` and placed in `qa_1/`.
+- [ ] `Question` copied exactly from finals page.
+- [ ] `Expected` hint included.
+- [ ] `Answer:` field present with `Tokens:` and `One-sentence explanation:`.
+- [ ] Sources listed as blob URLs and extraction notes added inside the HTML comment.
+- [ ] Run a quick spellcheck and keep wording concise (no large pasted sections from sources).
 
-Tokens:
-["I", "'m", "learning", "NLP", "in", "2025", "!"]
-
-One-sentence explanation:
-Tokenization splits raw text into discrete tokens (words, subwords, or punctuation) so NLP systems can process and analyze language; it's the first step because models require these discrete units instead of raw character strings.
-
-Sources (file links):
-- https://github.com/pythonai200425/pages_ai/blob/main/e_nlp/Ka-NLP-intro.md
-- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
-
-<!--
-pages_ai/e_nlp/Ka-NLP-intro.md: 
-used for the definition and simple example of tokenization.
-
-pythonai200425.github.io/vector-db.html: 
-used for chunking/token context and RAG pipeline rationale.
--->
+If you want, I can convert existing `answer.txt` to per-question files or generate `answer.md` from all entries. Ask me to proceed.

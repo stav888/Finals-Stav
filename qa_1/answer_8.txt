@@ -1,0 +1,36 @@
+qa #8
+
+Question (from finals page — Q8):
+Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question). The 3 steps are: chunk → embed → store (ingestion) and embed query → retrieve → generate (query time).
+
+Expected: list the ingestion steps, describe query-time steps, and briefly explain the role of each.
+
+Answer:
+
+Ingestion time (when you load documents):
+1) Chunk: Split large documents into smaller passages (chunks) sized for your embedding model (e.g., ~200–500 tokens) and add small overlaps if needed.
+2) Embed: Convert each chunk to a dense vector embedding using an embedding model.
+3) Store: Save embeddings (and chunk metadata/text) in a vector store or index for efficient nearest-neighbor search.
+
+Query time (when a user asks a question):
+1) Embed query: Convert the user's query into an embedding using the same embedding model.
+2) Retrieve: Perform nearest-neighbor search in the vector store to fetch the most relevant chunks.
+3) Generate: Provide the retrieved chunks as context to the LLM (optionally with prompt templates) and generate the final answer.
+
+Why this order matters:
+- Chunking ensures passages fit model input limits and improves retrieval precision.
+- Using the same embedding model for chunks and queries ensures comparable vectors.
+- Storing embeddings enables fast similarity search at query time, which grounds the LLM and reduces hallucinations.
+
+One-sentence summary:
+Ingestion = chunk → embed → store; Query = embed query → retrieve → generate — together they allow grounded, efficient, and up-to-date retrieval-augmented generation.
+
+Sources (file links):
+- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/rag_pdf/index.html
+- https://github.com/pythonai200425/pythonai200425.github.io/blob/main/vector-db.html
+
+"""
+pythonai200425.github.io/rag_pdf/index.html: Demo and walkthrough of RAG pipelines; used for the three-step ingestion/query flow and examples.
+
+pythonai200425.github.io/vector-db.html: Guidance on chunk sizes, embeddings, and nearest-neighbor retrieval; used for chunking and retrieval rationale.
+"""
