@@ -16,20 +16,6 @@
 # ════════════════════════════════════════════════════════════════════════════════
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # ════════════════════════════════════════════════════════════════════════════════
 # Chat with a DOCX (Gradio app) — adapted from rag_pdf example
 # ════════════════════════════════════════════════════════════════════════════════
@@ -39,11 +25,11 @@ from dotenv import load_dotenv
 import gradio as gr
 
 from langchain_community.document_loaders import Docx2txtLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
+from langchain_classic.chains import ConversationalRetrievalChain
+from langchain_classic.memory import ConversationBufferMemory
 
 
 load_dotenv()
