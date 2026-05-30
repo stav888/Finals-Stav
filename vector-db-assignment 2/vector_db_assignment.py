@@ -65,7 +65,7 @@ queries = [
     "film involving the subconscious mind",
     "story about growing up and taking responsibility",
     "animated film about friendship and loyalty",
-    "a high-stakes chase across a desolate landscape"
+    "a movie that was made only by the year 1994"
 ]
 
 for query in queries:
