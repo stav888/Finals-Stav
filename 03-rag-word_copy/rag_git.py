@@ -29,7 +29,7 @@ def load_and_index(docx_path: str):
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
     vectorstore = Chroma.from_documents(chunks, embedding=embeddings, persist_directory="./chroma_docx_db")
     
-    return vectorstore.as_retriever(search_kwargs={"k": 3})
+    return vectorstore.as_retriever(search_kwargs={"k": 4})
 
 
 def build_chain(retriever):
