@@ -47,7 +47,7 @@ def load_and_index(docx_path: str):
     print(f"Loaded {len(docs)} document(s) from {docx_path}")
 
     # Step 2: Split into chunks
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=60)
     chunks = splitter.split_documents(docs)
     print(f"Split into {len(chunks)} chunks")
 
@@ -56,7 +56,7 @@ def load_and_index(docx_path: str):
     vectorstore = Chroma.from_documents(chunks, embedding=embeddings, persist_directory="./chroma_docx_db")
 
     # Step 4: Return retriever
-    return vectorstore.as_retriever(search_kwargs={"k": 4})
+    return vectorstore.as_retriever(search_kwargs={"k": 3})
 
 
 def build_chain(retriever):
