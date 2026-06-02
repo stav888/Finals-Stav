@@ -75,95 +75,71 @@ class RestaurantChatbot:
         return result if result in valid else "general"
 
     def _notify_n8n(self, data: dict, event: str) -> None:
-        """Send webhook to n8n (simple version as per assignment)."""
-        if not self.n8n_webhook:
+        """Fire-and-forget webhook to n8n. Never crashes the chatbot."""
+        webhook_url = os.getenv("N8N_WEBHOOK_URL")
+        if not webhook_url:
             return
         try:
-            body = {**data, "event": event}
-            requests.post(self.n8n_webhook, json=body, timeout=5)
+            requests.post(
+                webhook_url,
+                json={**data, "event": event},
+                timeout=5
+            )
         except Exception:
-            pass
+            pass  # n8n being down should not crash the chatbot
 
     def _handle_reservation(self, question: str) -> str:
-        """Extract reservation details using LangChain + save to DB."""
-        if not self.llm:
-            return "Please call us directly to make a reservation!"
-
+        # Ask the LLM to extract structured data from the user's message
         extract_prompt = ChatPromptTemplate.from_messages([
-            (
-                "system",
-                "Extract reservation details from the message. "
-                "Return ONLY valid JSON with keys: "
-                "customer_name, date, time, party_size, contact. "
-                "Use null for missing fields. No explanation."
-            ),
+            ("system",
+             "Extract reservation details from the message. "
+             "Return ONLY valid JSON with keys: "
+             "customer_name, date, time, party_size, contact. "
+             "Use null for missing fields. No explanation."),
             ("human", "{question}")
         ])
+
+        if not self.llm:
+            return "Please call us directly to make a reservation!"
 
         chain = extract_prompt | self.llm | StrOutputParser()
         raw = chain.invoke({"question": question})
 
         try:
-            details = json.loads(raw.strip())
-        except (json.JSONDecodeError, TypeError):
-            return "Sorry, I couldn't understand the reservation details. Please try again with more information."
+            details = json.loads(raw)
+            required = ["customer_name", "date", "time", "party_size"]
+            if not all(details.get(k) for k in required):
+                return ("I need your name, date, time, and party size. "
+                        "Example: 'Table for 2 on Friday at 7pm, name is Sara'")
 
-        required = ["customer_name", "date", "time", "party_size"]
-        if not all(details.get(k) for k in required):
-            return (
-                "I need your name, date, time, and party size. "
-                "Example: 'Table for 2 on Friday at 7pm, name is Sara'"
+            from restaurant_db import book_reservation
+            res_id = book_reservation(
+                self.db_path,
+                details["customer_name"], details["date"],
+                str(details["time"]), int(details["party_size"]),
+                details.get("contact")
             )
+            self._notify_n8n({**details, "id": res_id}, event="reservation")
 
-        from restaurant_db import book_reservation
-
-        res_id = book_reservation(
-            self.db_path,
-            details["customer_name"],
-            details["date"],
-            str(details["time"]),
-            int(details["party_size"]),
-            details.get("contact")
-        )
-
-        self._notify_n8n({**details, "id": res_id}, event="reservation")
-
-        return (
-            f"✅ Reservation confirmed!\n"
-            f"Name: {details['customer_name']}\n"
-            f"Date: {details['date']} at {details['time']}\n"
-            f"Party of {details['party_size']} · Booking #{res_id}"
-        )
+            return (f"✅ Reservation confirmed!\n"
+                    f"Name: {details['customer_name']}\n"
+                    f"Date: {details['date']} at {details['time']}\n"
+                    f"Party of {details['party_size']} · Booking #{res_id}")
+        except (json.JSONDecodeError, ValueError):
+            return "Sorry, I couldn't process that. Please try again."
 
     def _handle_cancellation(self, question: str) -> str:
-        """Handle cancellation by booking ID."""
-        match = re.search(r"\b(\d+)\b", question)
-        if not match:
-            return "Please provide your booking ID number to cancel."
-
-        res_id = int(match.group(1))
-        from restaurant_db import get_reservation_by_id, cancel_reservation
-
-        reservation = get_reservation_by_id(self.db_path, res_id)
-        if not reservation:
-            return f"I couldn't find a reservation with ID #{res_id}."
-
-        if reservation.get("status") == "cancelled":
-            return f"Booking #{res_id} is already cancelled."
-
-        cancelled = cancel_reservation(self.db_path, res_id)
-        if not cancelled:
-            return f"I couldn't cancel booking #{res_id}."
-
-        self._notify_n8n({
-            "id": res_id,
-            "customer_name": reservation.get("customer_name"),
-            "date": reservation.get("date"),
-            "time": reservation.get("time"),
-            "party_size": reservation.get("party_size")
-        }, event="cancellation")
-
-        return f"Reservation #{res_id} has been cancelled."
+        # Simple: ask the user for their booking ID
+        # (For the bonus: use LLM to extract booking ID from the message)
+        import re
+        match = re.search(r'\b(\d+)\b', question)
+        if match:
+            res_id = int(match.group(1))
+            from restaurant_db import cancel_reservation
+            cancel_reservation(self.db_path, res_id)
+            self._notify_n8n({"id": res_id}, event="cancellation")
+            return f"Reservation #{res_id} has been cancelled."
+        return "Please provide your booking ID number to cancel."
 
     def answer(self, message: str) -> str:
         intent = self.classify_question(message)
