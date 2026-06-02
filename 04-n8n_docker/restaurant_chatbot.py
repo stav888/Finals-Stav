@@ -140,7 +140,7 @@ class RestaurantChatbot:
             self._notify_n8n({"id": res_id}, event="cancellation")
             return f"Reservation #{res_id} has been cancelled."
         return "Please provide your booking ID number to cancel."
-
+ 
     def answer(self, message: str) -> str:
         intent = self.classify_question(message)
         if intent == 'reservation':
