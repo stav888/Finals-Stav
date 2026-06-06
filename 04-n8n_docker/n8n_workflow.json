@@ -1,0 +1,96 @@
+{
+  "name": "Restaurant Webhook - reservation/cancellation",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "restaurant",
+        "httpMethod": "POST",
+        "responseMode": "lastNode"
+      },
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 250]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.event }}",
+              "operation": "equal",
+              "value2": "reservation"
+            }
+          ]
+        }
+      },
+      "id": "2",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [450, 250]
+    },
+    {
+      "parameters": {
+        "responseCode": 200,
+        "responseData": {
+          "type": "json",
+          "json": "={\"message\": \"Reservation received\", \"id\": $json.id, \"detail\": $json }"
+        }
+      },
+      "id": "3",
+      "name": "Respond Reservation",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 160]
+    },
+    {
+      "parameters": {
+        "responseCode": 200,
+        "responseData": {
+          "type": "json",
+          "json": "={\"message\": \"Cancellation received\", \"id\": $json.id, \"detail\": $json }"
+        }
+      },
+      "id": "4",
+      "name": "Respond Cancellation",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 340]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Respond Reservation",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Cancellation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {}
+}
