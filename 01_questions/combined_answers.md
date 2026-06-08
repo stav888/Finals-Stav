@@ -1,9 +1,5 @@
 # Finals — Combined Questions & Answers (1–12)
 
-This file combines the 12 Q&A items from the `01_questions` directory.
-
----
-
 ## Q1 — What is tokenization?
 
 Question: What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
@@ -12,7 +8,6 @@ Answer:
 Tokens:
 ["I", "'m", "learning", "NLP", "in", "2025", "!"]
 
-One-sentence explanation:
 Tokenization splits raw text into discrete tokens (words, subwords, or punctuation) so NLP systems can process and analyze language; it's the first step because models require these discrete units instead of raw character strings.
 
 ---
@@ -30,7 +25,7 @@ Lemmatization (POS-aware):
 - "running" (verb) -> "run"
 - "better" (adjective, comparative) -> "good"
 
-One-sentence explanation:
+Answer:
 Stemming crudely strips affixes and can produce non-words or leave irregular forms unchanged, while lemmatization uses vocabulary and part-of-speech information to return the proper dictionary (lemma) form — so lemmatization preserves more linguistic meaning.
 
 ---
@@ -142,5 +137,3 @@ Agent Skills are discoverable metadata + implementation packages that expose dom
 ```
 
 ---
-
-Sources: original files in the `01_questions` directory (answer_1.txt ... answer_12.txt) and linked reference material.
