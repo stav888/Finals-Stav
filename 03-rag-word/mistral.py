@@ -9,7 +9,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
-
+ 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 def load_and_index(docx_path: str):
