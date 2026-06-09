@@ -51,7 +51,7 @@ Answer:
 A sentence embedding is a fixed-length numeric vector representing the semantic meaning of a sentence in a continuous vector space. Unlike a one-hot vector, embeddings capture semantic relationships: similar sentences map to nearby vectors.
 
 Advantage:
-Embeddings allow measuring semantic similarity (e.g. via cosine similarity) so you can find semantically related sentences even when they share no exact words.
+Embeddings allow measuring semantic similarity, for example via cosine similarity, so you can find semantically related sentences even when they share no exact words.
 
 ---
 
