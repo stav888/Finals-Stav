@@ -1,7 +1,5 @@
 # Finals-Stav
 
-# Finals-Stav
-
 Finals-Stav contains the final assignments for the course. The repository holds the written theory answers, code for the practical assignments (vector DB, RAG, and a restaurant chatbot wired with n8n), and helper tools to export and regenerate deliverables.
 
 Table of contents
