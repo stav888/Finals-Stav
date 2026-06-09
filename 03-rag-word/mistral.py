@@ -8,7 +8,7 @@ from langchain_community.document_loaders import Docx2txtLoader
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_classic.chains import RetrievalQA  # Using RetrievalQA
+from langchain.chains import RetrievalQA
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
