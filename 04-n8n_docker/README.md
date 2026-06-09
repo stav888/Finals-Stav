@@ -10,11 +10,13 @@ Contents
 
 Quick start
 
-1. Copy the example env and edit values:
+1. Create a `.env` file in this folder and edit values (do not commit secrets):
 
 ```bash
-cp .env.example .env
-# edit .env to add OPENAI_API_KEY if you want LLM extraction
+# Create a file named .env in this folder and set the values below.
+# Example (fill in real values; do not commit):
+# N8N_WEBHOOK_URL=http://localhost:5678/webhook/restaurant
+# OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 2. Start n8n (in this folder):
