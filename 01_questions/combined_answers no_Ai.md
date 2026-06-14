@@ -58,10 +58,7 @@ Question: Explain cosine similarity in plain language.
 Answer:
 Cosine similarity measures how aligned two vectors are by the angle between them. If two document vectors point in almost the same direction, they share similar semantic content or topics. Cosine ignores magnitude differences, focusing on orientation, which makes it robust for semantic comparisons.
 |||
-Question: Describe the concept of cosine similarity using simple terms.
 
-Answer:
-The cosine similarity is a measure of alignment between two vectors based on the angle that exists between them. When two document vectors are pointed in a similar direction, their semantic meaning or subject matter is similar.
 ---
 
 ## Q6 — SQL LIKE vs Vector Index
