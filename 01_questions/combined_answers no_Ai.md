@@ -27,17 +27,16 @@ Better (comparative, adjective) -> good
 To clarify: Stemming punishes parts of the word too regular for his own good, and will therefore produce non-words and/or leave irregular forms unchanged. Lemmatization, however, can take into account both the vocabulary and part of speech associated with that term to return a properly defined form, so it provides more semantic significance than stemming.
 ---
 
-## Q3 — TF-IDF
+## Q3 — TF-IDF __________
 
-Question: What does TF-IDF stand for? Explain why the word "the" scores almost zero while "photosynthesis" scores high.
+Question: What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
 
-Answer:
-TF-IDF = Term Frequency × Inverse Document Frequency.
-- Term Frequency (TF): how often a word appears in a document.
-- Inverse Document Frequency (IDF): downweights words that appear in many documents.
+Answer
+TF- IDF = Term frequence × Inverse Document frequence.
+- Term frequence( TF) how frequently a word appears in a document.
+- Inverse Document frequence( IDF) downweights words that appear in numerous documents.
 
-A word gets a high TF-IDF score when it appears frequently in one document but rarely across the whole collection. "The" appears in almost every document so its IDF is near zero; "photosynthesis" is rare and thus scores high.
-
+A word gets a high TF- IDF score when it appears constantly in one document but infrequently across the whole collection." The" appears in nearly every document so its IDF is near zero;" photosynthesis" is rare and therefore scores high.
 ---
 
 ## Q4 — Sentence Embedding vs One-hot __________
