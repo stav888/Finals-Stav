@@ -16,17 +16,15 @@ In this process a system splits raw text into units that are discrete - those un
 Question: What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
 
 Answer:
-Stemming (Porter-like):
-- "running" -> "run"
-- "better" -> "better" (simple stemmers may not handle irregular comparatives)
+Stemming: 
+Running -> run
+Better -> better (Note: Simple stemmers will probably not convert an irregular form into a corresponding regular form)
 
-Lemmatization (POS-aware):
-- "running" (verb) -> "run"
-- "better" (adjective, comparative) -> "good"
+Lemmatization: 
+Running (verb) -> run
+Better (comparative, adjective) -> good
 
-Answer:
-Stemming crudely strips affixes and can produce non-words or leave irregular forms unchanged, while lemmatization uses vocabulary and part-of-speech information to return the proper dictionary (lemma) form — so lemmatization preserves more linguistic meaning.
-
+To clarify: Stemming punishes parts of the word too regular for his own good, and will therefore produce non-words and/or leave irregular forms unchanged. Lemmatization, however, can take into account both the vocabulary and part of speech associated with that term to return a properly defined form, so it provides more semantic significance than stemming.
 ---
 
 ## Q3 — TF-IDF
