@@ -40,16 +40,12 @@ A word gets a high TF-IDF score when it appears frequently in one document but r
 
 ---
 
-## Q4 — Sentence Embedding vs One-hot
+## Q4 — Sentence Embedding vs One-hot __________
 
 Question: What is a sentence embedding? How is it different from one-hot encoding? Give one advantage embeddings have.
 
 Answer:
-A sentence embedding is a fixed-length numeric vector representing the semantic meaning of a sentence in a continuous vector space. Unlike a one-hot vector, embeddings capture semantic relationships: similar sentences map to nearby vectors.
-
-Advantage:
-Embeddings allow measuring semantic similarity, for example via cosine similarity, so you can find semantically related sentences even when they share no exact words.
-
+A sentence embedding is a fixed-length vector of numbers that represents the overall meaning of a sentence in a continuous space. One-hot encoding, on the other hand, is just a sparse list that says which words are present — it has no idea about meaning or relationships between words.
 ---
 
 ## Q5 — Cosine Similarity
