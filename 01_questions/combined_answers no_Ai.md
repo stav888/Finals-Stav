@@ -1,6 +1,6 @@
 # Finals — Combined Questions & Answers (1–12)
 
-## Q1 — What is tokenization?
+## Q1 — What is tokenization? __________
 
 Question - What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
@@ -11,7 +11,7 @@ Tokens
 In this process a system splits raw text into units that are discrete - those units are words, subwords or punctuation. By using those parts, systems for natural language processing are able to process and analyze language - this task is the first step in the sequence because models are dependent on the discrete units rather than strings of raw characters.
 ---
 
-## Q2 — Stemming vs Lemmatization
+## Q2 — Stemming vs Lemmatization __________
 
 Question: What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
 
