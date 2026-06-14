@@ -30,7 +30,7 @@ To clarify: Stemming punishes parts of the word too regular for his own good, an
 ## Q3 — TF-IDF __________
 
 Question: What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
- 
+
 Answer
 TF- IDF = Term frequence × Inverse Document frequence.
 - Term frequence( TF) how frequently a word appears in a document.
