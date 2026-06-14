@@ -26,7 +26,7 @@ Better (comparative, adjective) -> good
 
 To clarify: Stemming punishes parts of the word too regular for his own good, and will therefore produce non-words and/or leave irregular forms unchanged. Lemmatization, however, can take into account both the vocabulary and part of speech associated with that term to return a properly defined form, so it provides more semantic significance than stemming.
 ---
- 
+
 ## Q3 — TF-IDF
 
 Question: What does TF-IDF stand for? Explain why the word "the" scores almost zero while "photosynthesis" scores high.
