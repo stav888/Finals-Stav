@@ -14,7 +14,7 @@ In this process a system splits raw text into units that are discrete - those un
 ## Q2 — Stemming vs Lemmatization
 
 Question: What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
-
+ 
 Answer:
 Stemming: 
 Running -> run
