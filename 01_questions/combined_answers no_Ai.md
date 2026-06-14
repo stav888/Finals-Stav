@@ -46,7 +46,7 @@ Question: What is a sentence embedding? How is it different from one-hot encodin
 Answer:
 A sentence embedding is a fixed-length vector of numbers that represents the overall meaning of a sentence in a continuous space. One-hot encoding, on the other hand, is just a sparse list that says which words are present — it has no idea about meaning or relationships between words.
 |||
-question: What is a sentence embedding? What is its difference from one-hot encoding? Provide one benefit that embeddings provide.
+question: What is a sentence embedding? How is it different from one-hot encoding? Give one advantage embeddings have.
 
 Sentence embedding is a fixed-sized numerical vector which captures the essence of the meaning of the sentence. One-hot encoding on the other hand is just a sparse vector that tells which words are present. It doesn’t even know anything about meaning or relationship between the words.
 ---
