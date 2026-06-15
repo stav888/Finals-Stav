@@ -3,7 +3,7 @@
 Use this file when adding more QA entries to this folder. Keep entries consistent and machine-readable so they can be processed automatically by scripts.
 
 Goals
-- Keep one question per `answer_<n>.txt` file. Follow the template exactly.
+- Keep one question per `q<n>.txt` file. Follow the template exactly.
 - Always include exact source blob URLs and a short extraction note per source.
 
 Template (replace values)
@@ -32,7 +32,7 @@ Extraction notes (keep inside this HTML comment):
 -->
 
 Filename conventions
-- Use `answer_<n>.txt` for each question (e.g., `answer_1.txt`).
+- Use `q<n>.txt` for each question (e.g., `q1.txt`).
 - Keep `answer.txt` as a combined or legacy file only if needed; prefer per-question files.
 
 Source citation rules
@@ -40,8 +40,8 @@ Source citation rules
 - Add a one-line extraction note per source inside the HTML comment block (as shown above).
 
 
-Quick checklist (before saving a new `answer_<n>.txt`)
-- [ ] File named `answer_<n>.txt` and placed in `qa_1/`.
+Quick checklist (before saving a new `q<n>.txt`)
+- [ ] File named `q<n>.txt` and placed in `qa_1/`.
 - [ ] `Question` copied exactly from finals page.
 - [ ] `Expected` hint included.
 - [ ] `Answer:` field present with `Tokens:` and `One-sentence explanation:`.
