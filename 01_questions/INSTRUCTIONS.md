@@ -7,7 +7,7 @@ Goals
 - Always include exact source blob URLs and a short extraction note per source.
 
 Template (replace values)
-
+ 
 qa #<n>
 
 Question (from finals page — Q<n>):
