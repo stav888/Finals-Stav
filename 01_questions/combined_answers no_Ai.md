@@ -1,133 +1,99 @@
 # Finals — Combined Questions & Answers (1–12)
 
-## Q1 — What is tokenization? __________
-
-Question - What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
-
-Answer
-Tokens
-["I", "'m", "learning", "NLP", "in", "2025", "!"]
-
-In this process a system splits raw text into units that are discrete - those units are words, subwords or punctuation. By using those parts, systems for natural language processing are able to process and analyze language - this task is the first step in the sequence because models are dependent on the discrete units rather than strings of raw characters.
----
-
-## Q2 — Stemming vs Lemmatization __________
-
-Question: What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
+## Q1 — What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
 Answer:
-Stemming: 
-Running -> run
-Better -> better (Note: Simple stemmers will probably not convert an irregular form into a corresponding regular form)
+Tokens (word-level): ["I", "'m", "learning", "NLP", "in", "2025", "!"]
 
-Lemmatization: 
-Running (verb) -> run
-Better (comparative, adjective) -> good
-
-To clarify: Stemming punishes parts of the word too regular for his own good, and will therefore produce non-words and/or leave irregular forms unchanged. Lemmatization, however, can take into account both the vocabulary and part of speech associated with that term to return a properly defined form, so it provides more semantic significance than stemming.
----
-
-## Q3 — TF-IDF __________
-
-Question: What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
-
-Answer
-TF- IDF = Term frequence × Inverse Document frequence.
-- Term frequence( TF) how frequently a word appears in a document.
-- Inverse Document frequence( IDF) downweights words that appear in numerous documents.
-
-A word gets a high TF- IDF score when it appears constantly in one document but infrequently across the whole collection." The" appears in nearly every document so its IDF is near zero;" photosynthesis" is rare and therefore scores high.
----
-
-## Q4 — Sentence Embedding vs One-hot __________
-
-Question: What is a sentence embedding? How is it different from one-hot encoding? Give one advantage embeddings have.
-
-Answer:
-A sentence embedding is a fixed-length vector of numbers that represents the overall meaning of a sentence in a continuous space. One-hot encoding, on the other hand, is just a sparse list that says which words are present — it has no idea about meaning or relationships between words.
-|||
-question: What is a sentence embedding? How is it different from one-hot encoding? Give one advantage embeddings have.
-
-Sentence embedding is a fixed-sized numerical vector which captures the essence of the meaning of the sentence. One-hot encoding on the other hand is just a sparse vector that tells which words are present. It doesn’t even know anything about meaning or relationship between the words.
----
-
-## Q5 — Cosine Similarity
-
-Question: Explain cosine similarity in plain language.
-
-Answer:
-Cosine similarity measures how aligned two vectors are by the angle between them. If two document vectors point in almost the same direction, they share similar semantic content or topics. Cosine ignores magnitude differences, focusing on orientation, which makes it robust for semantic comparisons.
-|||
-Question: Describe the concept of cosine similarity using simple terms.
-
-Answer:
-The cosine similarity is a measure of alignment between two vectors based on the angle that exists between them. When two document vectors are pointed in a similar direction, their semantic meaning or subject matter is similar.
----
-
-## Q6 — SQL LIKE vs Vector Index
-
-Question: Why can't `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve?
-
-Answer:
-`LIKE` performs literal substring matching and cannot detect semantic similarity when different words express the same concept. A vector index stores dense embeddings and supports nearest-neighbor search, enabling retrieval of semantically similar documents even when they share few or no exact words.
+Tokenization splits text into pieces so models can actually work with it. It's the first step because models need discrete tokens to convert into numbers. In simple terms, you can't feed raw sentences straight into a model; you first break them into tokens.
 
 ---
 
-## Q7 — What problem does RAG solve?
-
-Question: What problem does RAG solve that a plain LLM cannot? Give a concrete example.
+## Q2 — What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
 
 Answer:
-RAG (Retrieval-Augmented Generation) augments an LLM with a retriever that fetches relevant documents and conditions the model on those documents. This addresses knowledge cutoffs, private data access, and hallucinations. Example: a support agent retrieving the customer's account record and policy doc to craft a precise, verifiable answer.
+Stemming (Porter): "running" -> "run", "better" -> "better"
+
+Lemmatization (POS-aware): "running" -> "run", "better" -> "good"
+
+Stemmers chop off endings using quick rules. They're fast, but they can leave odd or non-words. Lemmatizers use a dictionary and grammar tags. They return the real base form, so they keep more meaning. In practice, lemmatization is cleaner but a bit slower.
 
 ---
 
-## Q8 — 3 main steps of a RAG pipeline
-
-Question: Describe the 3 main steps of a RAG pipeline (ingestion vs query time).
+Q3 — What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
 
 Answer:
-Ingestion: chunk → embed → store.
-Query time: embed query → retrieve → generate.
+TF-IDF = Term Frequency times Inverse Document Frequency.
 
-Chunking splits documents into manageable passages; embedding converts text to vectors; storing saves vectors for fast search. At query time you embed the query, retrieve relevant passages, and generate the final answer conditioned on those passages.
+TF counts how often a word appears in a document. IDF lowers the score for words that show up in lots of documents.
 
----
+That means "the" gets a tiny TF-IDF because it's everywhere. "Photosynthesis" scores high because it's rare and distinctive. That's why TF-IDF helps surface useful, topic-specific words.
 
-## Q9 — Docker image vs container
-
-Question: Difference between Docker image and Docker container; use an analogy.
+Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
 
 Answer:
-A Docker image is a read-only snapshot describing how to build a runnable environment (recipe/blueprint). A Docker container is a running instance created from that image (the finished cake or building). The image is the template; the container is the live process with runtime state.
+A sentence embedding is a compact numeric vector that captures a sentence's meaning. One-hot vectors only mark presence and are mostly zeros.
 
----
+The neat part is that similar sentences end up close together in vector space. This is useful because it lets you measure semantic similarity directly, for example with cosine similarity.
 
-## Q10 — LLM chatbot vs AI agent with tools
-
-Question: What is the difference between a simple LLM chatbot and an AI agent with tools? Give an example of a tool.
+Q5 — Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
 
 Answer:
-A simple LLM chatbot generates text only from its model weights and prompt. An AI agent with tools can call external systems (search, databases, code runners) to access live data and perform actions. Example: a web search tool lets the agent retrieve up-to-date info and verify facts in real time.
+Cosine similarity measures the angle between two vectors. If the vectors point in almost the same direction, the angle is small and the similarity is high. If they point in opposite directions, similarity is low. The key difference from Euclidean distance is that cosine ignores length. So a short note and a long article about the same topic can still score highly.
 
----
-
-## Q11 — What is MCP (Model Context Protocol)?
-
-Question: What is MCP and what problem does it solve? Name two examples of capabilities it might expose.
+Q6 — Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
 
 Answer:
-MCP standardizes how external context providers expose structured data and tools to assistants, solving ad-hoc brittle integrations. Examples of capabilities: filesystem access (list/read files) and a GitHub API proxy (query issues/pull requests).
+`LIKE` does literal substring matching. You search for "pizza" and you only get entries that literally contain "pizza", nothing else. For example, "Italian food" or "pasta and risotto" won't match, even though they're about the same topic.
 
----
+A vector index fixes this. You embed documents into vectors, then you search for the chunks closest to the question. That returns semantically related results even when the words differ.
 
-## Q12 — What are Agent Skills?
-
-Question: What are Agent Skills and how are they different from plain prompts? Show minimal `.md` metadata example.
+Q7 — What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
 
 Answer:
-Agent Skills are discoverable metadata + implementation packages that expose domain-specific capabilities as structured files (metadata and content). Unlike plain prompts, Skills are discoverable, versioned, and reusable. Minimal metadata example:
+RAG gives an LLM real documents to base its answer on. That reduces hallucinations and lets the model use up-to-date or private information. For example, pick RAG for a support bot. It can fetch a customer's account record and the policy text, then give a specific, verifiable answer instead of guessing.
 
+This matters because LLMs alone only rely on their training data, which may be out of date.
+
+Q8 — Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
+
+Answer:
+Ingestion time (done once, offline):
+Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector. Store all vectors in a database that supports similarity search.
+Query time (when a user asks):
+1. Convert the user's question into a vector.
+2. Search the database for the most similar chunks.
+3. Feed those chunks to the LLM with the original question.
+
+The goal is to give the LLM relevant context so it doesn't have to guess.
+
+Q9 — What is the difference between a Docker image and a Docker container? Use an analogy to explain.
+
+Answer:
+Think of an image as the recipe or blueprint. A container is the cake you bake from that recipe. The recipe is static. The cake is a running thing with state. You can make many cakes from the same recipe.
+
+Q10 — What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
+
+Answer:
+A plain LLM chatbot only generates text from its internal model and the prompt. An AI agent can call tools like web search, a database, or APIs to fetch live data or take actions. For example, a calendar API lets the agent check availability and actually schedule a meeting instead of just suggesting times.
+
+Q11 — What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
+
+Answer:
+Before MCP, every tool needed its own custom integration. That made connecting new tools slow and brittle.
+
+MCP gives tools a standard way to declare what they can do. Once a tool exposes its capabilities, any compatible assistant can call them without extra wiring.
+
+Examples:
+- Filesystem access — list files, read file contents
+- GitHub API — search issues, list pull requests, post comments
+
+Q12 — What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
+
+Answer:
+Skills are packaged, discoverable capabilities that include metadata, docs, and instructions. They're reusable and versioned. An assistant can activate them when relevant. A plain prompt is just text you type each time.
+
+Minimal metadata example (XML):
 ```
 <skill>
   <name>mongodb-query-optimizer</name>
@@ -135,5 +101,3 @@ Agent Skills are discoverable metadata + implementation packages that expose dom
   <file>skills/mongodb-query-optimizer/SKILL.md</file>
 </skill>
 ```
-
----
