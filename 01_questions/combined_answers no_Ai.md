@@ -45,7 +45,8 @@ The neat part is that similar sentences end up close together in vector space. T
 
 ### Q5 — Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
 
-Answer:
+> Answer:
+
 Cosine similarity measures the angle between two vectors. If the vectors point in almost the same direction, the angle is small and the similarity is high. If they point in opposite directions, similarity is low. The key difference from Euclidean distance is that cosine ignores length. So a short note and a long article about the same topic can still score highly.
 
 ---
