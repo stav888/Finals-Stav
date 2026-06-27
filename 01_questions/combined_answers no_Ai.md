@@ -104,7 +104,6 @@ A plain LLM chatbot only generates text from its internal model and the prompt. 
 
 > Answer:
 
-Answer:
 MCP (Model Context Protocol) standardizes how tools and assistants talk. Instead of building one-off integrations for every tool, a tool declares what it can do and an assistant can call those capabilities directly. That makes connecting new tools faster and less brittle.
 
 Examples:
