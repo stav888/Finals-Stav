@@ -1,3 +1,4 @@
+```markdown
 # Finals — Combined Questions & Answers (1–12)
 
 ### Q1 — What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
@@ -26,11 +27,11 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 
 > Answer:
 
-TF-IDF = Term Frequency times Inverse Document Frequency.
+TF-IDF stands for Term Frequency × Inverse Document Frequency.
 
-TF counts how often a word appears in a document. IDF lowers the score for words that show up in lots of documents.
+Term Frequency (TF) counts how often a word appears in a document. Inverse Document Frequency (IDF) downweights words that show up across many documents, so very common words get a low IDF.
 
-That means "the" gets a tiny TF-IDF because it's everywhere. "Photosynthesis" scores high because it's rare and distinctive. That's why TF-IDF helps surface useful, topic-specific words.
+Put together, TF-IDF gives high scores to words that are frequent in this document but rare elsewhere. So "the" scores near zero because it's everywhere, while "photosynthesis" scores high because it's distinctive. That’s why TF-IDF helps surface the most informative, topic-specific words.
 
 ---
 
@@ -38,9 +39,9 @@ That means "the" gets a tiny TF-IDF because it's everywhere. "Photosynthesis" sc
 
 > Answer:
 
-A sentence embedding is a compact numeric vector that captures a sentence's meaning. One-hot vectors only mark presence and are mostly zeros.
+A sentence embedding is a compact numeric vector that captures a sentence's meaning. One-hot vectors, by contrast, only mark which words appear and are mostly zeros.
 
-The neat part is that similar sentences end up close together in vector space. This is useful because it lets you measure semantic similarity directly, for example with cosine similarity.
+The neat part is that similar sentences end up close together in vector space. This matters because you can measure semantic similarity directly (for example with cosine similarity) and find related sentences even when they don't share the same words.
 
 ---
 
@@ -76,14 +77,13 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 > Answer:
 
-Ingestion time (done once, offline):
-Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector. Store all vectors in a database that supports similarity search.
-Query time (when a user asks):
-1. Convert the user's question into a vector.
-2. Search the database for the most similar chunks.
-3. Feed those chunks to the LLM with the original question.
+Answer:
 
-The goal is to give the LLM relevant context so it doesn't have to guess.
+Ingestion time (done once, offline):
+Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector and store those vectors in a similarity-searchable vector database.
+
+Query time (when a user asks):
+First, convert the user's question into a vector that represents its meaning. Then use that vector to retrieve the most similar document chunks from the database. After that, pass those retrieved chunks along with the original question to the LLM so it can generate an answer grounded in the documents. The purpose is to give the model relevant, up-to-date context so it doesn't have to guess.
 
 ---
 
@@ -107,13 +107,12 @@ A plain LLM chatbot only generates text from its internal model and the prompt. 
 
 > Answer:
 
-Before MCP, every tool needed its own custom integration. That made connecting new tools slow and brittle.
-
-MCP gives tools a standard way to declare what they can do. Once a tool exposes its capabilities, any compatible assistant can call them without extra wiring.
+Answer:
+MCP (Model Context Protocol) standardizes how tools and assistants talk. Instead of building one-off integrations for every tool, a tool declares what it can do and an assistant can call those capabilities directly. That makes connecting new tools faster and less brittle.
 
 Examples:
-- Filesystem access — list files, read file contents
-- GitHub API — search issues, list pull requests, post comments
+- Filesystem access — list files, read file contents, open editors.
+- GitHub API — search issues, list pull requests, post comments.
 
 ---
 
@@ -131,3 +130,4 @@ Minimal metadata example (XML):
   <file>skills/mongodb-query-optimizer/SKILL.md</file>
 </skill>
 ```
+````
