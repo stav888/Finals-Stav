@@ -76,6 +76,7 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 > Answer:
 
+
 Ingestion time (done once, offline):
 Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector and store those vectors in a similarity-searchable vector database.
 
