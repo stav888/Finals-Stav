@@ -35,7 +35,7 @@ That means "the" gets a tiny TF-IDF because it's everywhere. "Photosynthesis" sc
 
 ### Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
 
-Answer:
+> Answer:
 
 A sentence embedding is a compact numeric vector that captures a sentence's meaning. One-hot vectors only mark presence and are mostly zeros.
 
@@ -52,7 +52,8 @@ Cosine similarity measures the angle between two vectors. If the vectors point i
 
 ### Q6 — Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
 
-Answer:
+> Answer:
+
 `LIKE` does literal substring matching. You search for "pizza" and you only get entries that literally contain "pizza", nothing else. For example, "Italian food" or "pasta and risotto" won't match, even though they're about the same topic.
 
 A vector index fixes this. You embed documents into vectors, then you search for the chunks closest to the question. That returns semantically related results even when the words differ.
@@ -61,7 +62,8 @@ A vector index fixes this. You embed documents into vectors, then you search for
 
 ### Q7 — What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
 
-Answer:
+> Answer:
+
 RAG gives an LLM real documents to base its answer on. That reduces hallucinations and lets the model use up-to-date or private information. For example, pick RAG for a support bot. It can fetch a customer's account record and the policy text, then give a specific, verifiable answer instead of guessing.
 
 This matters because LLMs alone only rely on their training data, which may be out of date.
@@ -70,7 +72,8 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 ### Q8 — Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
 
-Answer:
+> Answer:
+
 Ingestion time (done once, offline):
 Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector. Store all vectors in a database that supports similarity search.
 Query time (when a user asks):
@@ -84,21 +87,24 @@ The goal is to give the LLM relevant context so it doesn't have to guess.
 
 ### Q9 — What is the difference between a Docker image and a Docker container? Use an analogy to explain.
 
-Answer:
+> Answer:
+
 Think of an image as the recipe or blueprint. A container is the cake you bake from that recipe. The recipe is static. The cake is a running thing with state. You can make many cakes from the same recipe.
 
 ---
 
 ### Q10 — What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
 
-Answer:
+> Answer:
+
 A plain LLM chatbot only generates text from its internal model and the prompt. An AI agent can call tools like web search, a database, or APIs to fetch live data or take actions. For example, a calendar API lets the agent check availability and actually schedule a meeting instead of just suggesting times.
 
 ---
 
 ### Q11 — What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
 
-Answer:
+> Answer:
+
 Before MCP, every tool needed its own custom integration. That made connecting new tools slow and brittle.
 
 MCP gives tools a standard way to declare what they can do. Once a tool exposes its capabilities, any compatible assistant can call them without extra wiring.
@@ -111,7 +117,8 @@ Examples:
 
 ### Q12 — What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
 
-Answer:
+> Answer:
+
 Skills are packaged, discoverable capabilities that include metadata, docs, and instructions. They're reusable and versioned. An assistant can activate them when relevant. A plain prompt is just text you type each time.
 
 Minimal metadata example (XML):
