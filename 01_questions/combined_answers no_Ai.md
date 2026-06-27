@@ -25,7 +25,6 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 ### Q3 — What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
 
 > Answer:
-
 TF-IDF = Term Frequency times Inverse Document Frequency.
 
 TF counts how often a word appears in a document. IDF lowers the score for words that show up in lots of documents.
