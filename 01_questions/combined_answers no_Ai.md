@@ -29,6 +29,8 @@ TF counts how often a word appears in a document. IDF lowers the score for words
 
 That means "the" gets a tiny TF-IDF because it's everywhere. "Photosynthesis" scores high because it's rare and distinctive. That's why TF-IDF helps surface useful, topic-specific words.
 
+---
+
 Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
 
 Answer:
@@ -36,10 +38,14 @@ A sentence embedding is a compact numeric vector that captures a sentence's mean
 
 The neat part is that similar sentences end up close together in vector space. This is useful because it lets you measure semantic similarity directly, for example with cosine similarity.
 
+---
+
 Q5 — Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
 
 Answer:
 Cosine similarity measures the angle between two vectors. If the vectors point in almost the same direction, the angle is small and the similarity is high. If they point in opposite directions, similarity is low. The key difference from Euclidean distance is that cosine ignores length. So a short note and a long article about the same topic can still score highly.
+
+---
 
 Q6 — Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
 
@@ -48,12 +54,16 @@ Answer:
 
 A vector index fixes this. You embed documents into vectors, then you search for the chunks closest to the question. That returns semantically related results even when the words differ.
 
+---
+
 Q7 — What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
 
 Answer:
 RAG gives an LLM real documents to base its answer on. That reduces hallucinations and lets the model use up-to-date or private information. For example, pick RAG for a support bot. It can fetch a customer's account record and the policy text, then give a specific, verifiable answer instead of guessing.
 
 This matters because LLMs alone only rely on their training data, which may be out of date.
+
+---
 
 Q8 — Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
 
@@ -67,15 +77,21 @@ Query time (when a user asks):
 
 The goal is to give the LLM relevant context so it doesn't have to guess.
 
+---
+
 Q9 — What is the difference between a Docker image and a Docker container? Use an analogy to explain.
 
 Answer:
 Think of an image as the recipe or blueprint. A container is the cake you bake from that recipe. The recipe is static. The cake is a running thing with state. You can make many cakes from the same recipe.
 
+---
+
 Q10 — What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
 
 Answer:
 A plain LLM chatbot only generates text from its internal model and the prompt. An AI agent can call tools like web search, a database, or APIs to fetch live data or take actions. For example, a calendar API lets the agent check availability and actually schedule a meeting instead of just suggesting times.
+
+---
 
 Q11 — What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
 
@@ -87,6 +103,8 @@ MCP gives tools a standard way to declare what they can do. Once a tool exposes 
 Examples:
 - Filesystem access — list files, read file contents
 - GitHub API — search issues, list pull requests, post comments
+
+---
 
 Q12 — What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
 
