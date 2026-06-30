@@ -126,6 +126,7 @@ A plain prompt is something you type from scratch every time. A Skill is differe
 
 Simple example:
 
+
 ```xml
 <skill>
   <name>docker-compose-debugger</name>
