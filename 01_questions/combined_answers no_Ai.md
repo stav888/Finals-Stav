@@ -14,9 +14,9 @@ Tokenization splits text into pieces so models can actually work with it. It's t
 
 > Answer:
 
-Stemming (Porter): "running" -> "run", "better" -> "better"
+Stemming: "running" -> "run", "better" -> "better"
 
-Lemmatization (POS-aware): "running" -> "run", "better" -> "good"
+Lemmatization: "running" -> "run", "better" -> "good"
 
 Stemmers chop off endings using quick rules. They're fast, but they can leave odd or non-words. Lemmatizers use a dictionary and grammar tags. They return the real base form, so they keep more meaning. In practice, lemmatization is cleaner but a bit slower.
 
