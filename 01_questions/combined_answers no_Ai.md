@@ -116,13 +116,19 @@ Examples:
 
 > Answer:
 
-Skills are packaged, discoverable capabilities that include metadata, docs, and instructions. They're reusable and versioned. An assistant can activate them when relevant. A plain prompt is just text you type each time.
+Agent Skills are small, shareable packages that bundle metadata, documentation, and clear instructions. They’re versioned so teams can update and reuse them easily.
 
-Minimal metadata example (XML):
-```
+A plain prompt is something you type from scratch every time. A Skill is different — it gives the assistant a structured rule for *when* and *how* to act, so the assistant can spot the right moment and apply the Skill automatically without repeated instructions.
+
+Simple example:
+
+```xml
 <skill>
-  <name>mongodb-query-optimizer</name>
-  <description>Help optimize MongoDB queries and suggest indexes.</description>
-  <file>skills/mongodb-query-optimizer/SKILL.md</file>
+  <name>docker-compose-debugger</name>
+  <description>
+    Help debug Docker Compose setup issues.
+    Use when the user asks "Why won't my containers start?" or "How do I fix this Docker error?"
+  </description>
+  <file>skills/docker-compose-debugger/SKILL.md</file>
 </skill>
 ```
