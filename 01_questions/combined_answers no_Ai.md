@@ -76,11 +76,15 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 > Answer:
 
-Ingestion time (done once, offline):
-Break documents into chunks small enough to fit in the model's context window. Convert each chunk into a vector and store those vectors in a similarity-searchable vector database.
+Ingestion (one-time, offline):
+1) Chunking — split documents into passages or chunks.
+2) Embedding — convert each chunk into a numeric vector.
+3) Indexing / Storage — store those vectors in a vector database.
 
-Query time (when a user asks):
-First, convert the user's question into a vector that represents its meaning. Then use that vector to retrieve the most similar document chunks from the database. After that, pass those retrieved chunks along with the original question to the LLM so it can generate an answer grounded in the documents. The purpose is to give the model relevant, up-to-date context so it doesn't have to guess.
+Query time (when someone asks):
+1) Embed the user's question.
+2) Retrieve the closest chunks.
+3) Generate an answer using those chunks as context.
 
 ---
 
