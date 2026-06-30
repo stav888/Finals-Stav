@@ -28,9 +28,9 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 
 TF-IDF stands for Term Frequency × Inverse Document Frequency.
 
-Term Frequency (TF) counts how often a word appears in a document. Inverse Document Frequency (IDF) downweights words that show up across many documents, so very common words get a low IDF.
+TF (term frequency) is just how often a word shows up in a document. IDF (inverse document frequency) lowers the score for words that appear in lots of documents.
 
-Put together, TF-IDF gives high scores to words that are frequent in this document but rare elsewhere. So "the" scores near zero because it's everywhere, while "photosynthesis" scores high because it's distinctive. That’s why TF-IDF helps surface the most informative, topic-specific words.
+Put them together and TF-IDF boosts words that are common in this document but rare across the whole collection. So "the" gets almost zero — it's everywhere. "Photosynthesis" scores high because it's distinctive to some documents. That's why TF-IDF helps pull out the most informative words.
 
 ---
 
