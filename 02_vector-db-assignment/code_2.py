@@ -90,17 +90,16 @@ for query in queries:
         print(f"  Distance: {dist:.4f}  |  {doc[:80]}...")
         print(f"  Metadata: {meta}")
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 70)
 print("Analysis (5–8 sentences):\n")
 
 print("Q: Which query returned the most relevant results, and why?")
-print("A: The query \"film involving the subconscious mind\" returned the most relevant results because it produced the lowest L2 distance (\"Inception\" — 0.4526), indicating the embedding matched the conceptual theme rather than surface words.")
-print()
+print("A: The query about books explaining the nature of time and reality returned the most relevant results. It achieved the lowest distances, likely because the embeddings successfully captured abstract concepts like time, reality, and physics rather than relying on exact keywords.\n")
 
-print("Q: Did any query return a surprisingly good match — a document that matched the concept even though it didn't share any words?")
-print("A: Yes — the \"animated film about friendship and loyalty\" query returned \"The Shawshank Redemption\" (0.5079) despite not sharing animation keywords; the model matched on friendship/loyalty semantics rather than exact word overlap.")
-print()
+print("Q: Did any query return a surprisingly good match — a document that matched the concept even though it didn't share many words?")
+print("A: Yes. The query about future technologies and scientific possibilities matched well with books like 'Physics of the Impossible', even when the exact words 'future' or 'technology' were not heavily present in the text. This shows the strength of semantic search.\n")
 
-print("Q: What distance threshold would you use to decide \"this result is relevant\"?")
-print("A: For this dataset: < 0.5 = strong relevance, 0.5–0.6 = likely relevant, 0.6–0.7 = borderline, > 0.7 = weak/noisy. These should be tuned for larger or domain-specific collections.")
-print()
+print("Q: What distance threshold would you use to decide 'this result is relevant'?")
+print("A: Based on the results, I would consider distances below 0.55 as strong relevance, 0.55–0.65 as likely relevant, and above 0.7 as weak or unrelated. These thresholds can vary depending on the dataset and embedding model used.\n")
+
+print("=" * 70)
