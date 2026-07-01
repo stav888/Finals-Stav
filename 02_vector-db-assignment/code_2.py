@@ -94,22 +94,18 @@ print("\n" + "=" * 50)
 print("Short Analysis:\n")
 
 print(
-    "The query about books explaining the nature of time and reality produced the most relevant results, "
-    "achieving the lowest distances overall. This is likely because the embeddings effectively captured "
-    "abstract concepts such as time, reality, and physics, rather than depending on exact keyword matches.\n"
+    "The query about books on time and reality gave the best results with the lowest distances. "
+    "It seems the embeddings picked up on bigger ideas like time, reality, and physics, rather than just matching exact words.\n"
 )
 
 print(
-    "One surprisingly good match occurred with the query about future technologies and scientific possibilities, "
-    "which aligned well with the book 'Physics of the Impossible'. The model recognized the conceptual connection "
-    "even though the text did not contain many of the exact words from the query. This demonstrates the advantage "
-    "of semantic search over simple keyword matching.\n"
+    "One interesting case was the query about future technologies. The book 'Physics of the Impossible' ranked pretty high, "
+    "even though the book text didn't contain the same words as the query. This is a good example of semantic search working better than simple keyword matching.\n"
 )
 
 print(
-    "Based on the results, I would consider distances below 0.55 as strongly relevant, distances between 0.55 and 0.65 "
-    "as likely relevant, and anything above 0.7 as weak or unrelated. These thresholds should be adjusted depending "
-    "on the specific dataset and embedding model being used."
+    "From this small test, distances below 0.55 usually mean strong relevance, 0.55–0.65 are worth checking, "
+    "and anything above 0.7 is probably not very relevant. These numbers can vary depending on your dataset, so it's worth tuning them."
 )
 
 print("=" * 50)
