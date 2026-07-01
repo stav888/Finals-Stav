@@ -90,7 +90,7 @@ for query in queries:
         print(f"  Distance: {dist:.4f}  |  {doc[:80]}...")
         print(f"  Metadata: {meta}")
 
-print("\n" + "=" * 70)
+print("\n" + "=" * 50)
 print("Short Analysis:\n")
 
 print(
@@ -112,4 +112,4 @@ print(
     "on the specific dataset and embedding model being used."
 )
 
-print("=" * 70)
+print("=" * 50)
