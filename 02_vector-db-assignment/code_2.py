@@ -12,12 +12,11 @@ ef = SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 
 client = chromadb.Client()
 collection = client.create_collection(
-    name="popular_science",
+    name="Science_collection",
     embedding_function=ef
 )
 
 # At least 15 documents with metadata
-# ====================== DOCUMENTS & METADATA ======================
 
 documents = [
     "A Brief History of Time explores the universe from the Big Bang to black holes and explains complex physics in simple terms.",
@@ -34,8 +33,6 @@ documents = [
     "Wonders of the Universe explores the most extraordinary phenomena in the cosmos, from stars to black holes.",
     "The Fabric of the Cosmos investigates space, time, and the nature of reality according to modern physics.",
     "Why Evolution is True presents clear evidence supporting the theory of evolution by natural selection.",
-    "The Immortal Life of Henrietta Lacks tells the story of the woman whose cells changed modern medicine.",
-    "The Sixth Extinction discusses how human activity is causing the sixth mass extinction on Earth.",
     "Quantum: Einstein, Bohr and the Great Debate discusses the history and debates of quantum mechanics."
 ]
 
@@ -54,8 +51,6 @@ metadatas = [
     {"genre": "Astronomy", "year": 2011},
     {"genre": "Physics", "year": 2004},
     {"genre": "Biology", "year": 2009},
-    {"genre": "Biology", "year": 2010},
-    {"genre": "Environment", "year": 2014},
     {"genre": "Physics", "year": 2005}
 ]
 
@@ -94,18 +89,22 @@ print("\n" + "=" * 50)
 print("Short Analysis:\n")
 
 print(
-    "The query about books on time and reality gave the best results with the lowest distances. "
-    "It seems the embeddings picked up on bigger ideas like time, reality, and physics, rather than just matching exact words.\n"
+    "The query regarding books that explain the nature of time and reality produced the most relevant results, "
+    "achieving the lowest overall distances. This suggests that the embedding model successfully captured abstract "
+    "concepts such as time, reality, and fundamental physics, rather than relying solely on surface-level keywords.\n"
 )
 
 print(
-    "One interesting case was the query about future technologies. The book 'Physics of the Impossible' ranked pretty high, "
-    "even though the book text didn't contain the same words as the query. This is a good example of semantic search working better than simple keyword matching.\n"
+    "A particularly interesting result came from the query about future technologies and scientific possibilities. "
+    "The book 'Physics of the Impossible' ranked highly even though its text did not contain many of the exact words "
+    "from the query. This demonstrates the advantage of semantic search, which can identify conceptual similarity "
+    "beyond simple word matching.\n"
 )
 
 print(
-    "From this small test, distances below 0.55 usually mean strong relevance, 0.55–0.65 are worth checking, "
-    "and anything above 0.7 is probably not very relevant. These numbers can vary depending on your dataset, so it's worth tuning them."
+    "Based on the observed results, distances below 0.55 generally indicate strong relevance, while distances between "
+    "0.55 and 0.65 are usually worth considering. Results above 0.7 tended to be less relevant. These thresholds are "
+    "not fixed and should be adjusted according to the specific dataset and embedding model used."
 )
 
 print("=" * 50)
