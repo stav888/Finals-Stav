@@ -91,7 +91,7 @@ for query in queries:
         print(f"  Metadata: {meta}")
 
 print("\n" + "=" * 70)
-print("Analysis:\n")
+print("Short Analysis:\n")
 
 print(
     "The query about books explaining the nature of time and reality produced the most relevant results, "
