@@ -12,7 +12,7 @@ ef = SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 
 client = chromadb.Client()
 collection = client.create_collection(
-    name="movies_collection",
+    name="popular_science",
     embedding_function=ef
 )
 
