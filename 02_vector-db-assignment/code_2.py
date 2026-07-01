@@ -107,5 +107,5 @@ print(
     "From this small test, distances below 0.55 usually mean strong relevance, 0.55–0.65 are worth checking, "
     "and anything above 0.7 is probably not very relevant. These numbers can vary depending on your dataset, so it's worth tuning them."
 )
- 
+
 print("=" * 50)
