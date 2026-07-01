@@ -1,6 +1,6 @@
-# Finals — Combined Questions & Answers (1–12)
+# Finals - Combined Questions & Answers (1–12)
 
-### Q1 — What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
+### Q1 - What is tokenization? Give an example - show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
 > Answer:
 
@@ -10,7 +10,7 @@ Tokenization splits text into pieces so models can actually work with it. It's t
 
 ---
 
-### Q2 — What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
+### Q2 - What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
 
 > Answer:
 
@@ -22,7 +22,7 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 
 ---
 
-### Q3 — What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
+### Q3 - What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
 
 > Answer:
 
@@ -30,11 +30,11 @@ TF-IDF stands for Term Frequency × Inverse Document Frequency.
 
 TF (term frequency) is just how often a word shows up in a document. IDF (inverse document frequency) lowers the score for words that appear in lots of documents.
 
-Put them together and TF-IDF boosts words that are common in this document but rare across the whole collection. So "the" gets almost zero — it's everywhere. "Photosynthesis" scores high because it's distinctive to some documents. That's why TF-IDF helps pull out the most informative words.
+Put them together and TF-IDF boosts words that are common in this document but rare across the whole collection. So "the" gets almost zero - it's everywhere. "Photosynthesis" scores high because it's distinctive to some documents. That's why TF-IDF helps pull out the most informative words.
 
 ---
 
-### Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
+### Q4 - What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
 
 > Answer:
 
@@ -44,7 +44,7 @@ The neat part is that similar sentences end up close together in vector space. T
 
 ---
 
-### Q5 — Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
+### Q5 - Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
 
 > Answer:
 
@@ -52,7 +52,7 @@ Cosine similarity measures the angle between two vectors. If the vectors point i
 
 ---
 
-### Q6 — Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
+### Q6 - Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
 
 > Answer:
 
@@ -62,7 +62,7 @@ A vector index fixes this. You embed documents into vectors, then you search for
 
 ---
 
-### Q7 — What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
+### Q7 - What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
 
 > Answer:
 
@@ -72,14 +72,14 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 ---
 
-### Q8 — Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
+### Q8 - Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
 
 > Answer:
 
 Ingestion (one-time, offline):
-1) Chunking — split documents into passages or chunks.
-2) Embedding — convert each chunk into a numeric vector.
-3) Indexing / Storage — store those vectors in a vector database.
+1) Chunking - split documents into passages or chunks.
+2) Embedding - convert each chunk into a numeric vector.
+3) Indexing / Storage - store those vectors in a vector database.
 
 Query time (when someone asks):
 1) Embed the user's question.
@@ -88,7 +88,7 @@ Query time (when someone asks):
 
 ---
 
-### Q9 — What is the difference between a Docker image and a Docker container? Use an analogy to explain.
+### Q9 - What is the difference between a Docker image and a Docker container? Use an analogy to explain.
 
 > Answer:
 
@@ -96,7 +96,7 @@ Think of an image as the recipe or blueprint. A container is the cake you bake f
 
 ---
 
-### Q10 — What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
+### Q10 - What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
 
 > Answer:
 
@@ -104,25 +104,25 @@ A plain LLM chatbot only generates text from its internal model and the prompt. 
 
 ---
 
-### Q11 — What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
+### Q11 - What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
 
 > Answer:
 
 MCP (Model Context Protocol) standardizes how tools and assistants talk. Instead of building one-off integrations for every tool, a tool declares what it can do and an assistant can call those capabilities directly. That makes connecting new tools faster and less brittle.
 
 Examples:
-- Filesystem access — list files, read file contents, open editors.
-- GitHub API — search issues, list pull requests, post comments.
+- Filesystem access - list files, read file contents, open editors.
+- GitHub API - search issues, list pull requests, post comments.
 
 ---
 
-### Q12 — What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
+### Q12 - What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
 
 > Answer:
 
 Agent Skills are small, shareable packages that bundle metadata, documentation, and clear instructions. They’re versioned so teams can update and reuse them easily.
 
-A plain prompt is something you type from scratch every time. A Skill is different — it gives the assistant a structured rule for *when* and *how* to act, so the assistant can spot the right moment and apply the Skill automatically without repeated instructions.
+A plain prompt is something you type from scratch every time. A Skill is different - it gives the assistant a structured rule for *when* and *how* to act, so the assistant can spot the right moment and apply the Skill automatically without repeated instructions.
 
 Simple example:
 
