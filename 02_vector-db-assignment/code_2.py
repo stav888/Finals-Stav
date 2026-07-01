@@ -92,7 +92,7 @@ for query in queries:
 
 print("\n" + "=" * 70)
 print("Analysis:\n")
- 
+
 print(
     "The query about books explaining the nature of time and reality produced the most relevant results, "
     "achieving the lowest distances overall. This is likely because the embeddings effectively captured "
