@@ -5,7 +5,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
- 
+
 # Load the Word document
 DOCX_FILE = "./Stav_Kesler_CV_Updated.docx"
 
