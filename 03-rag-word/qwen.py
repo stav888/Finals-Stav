@@ -12,7 +12,7 @@ DOCX_FILE = "./Stav_Kesler_CV_Updated.docx"
 loader = Docx2txtLoader(DOCX_FILE)
 docs = loader.load()
 print(f"✓ Loaded {len(docs)} document(s) from {DOCX_FILE}")
- 
+
 # Split the document into chunks
 splitter = RecursiveCharacterTextSplitter(
     chunk_size=500,
