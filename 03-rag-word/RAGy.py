@@ -1,6 +1,7 @@
 """Chat with DOCX files using RAG — Assignment 3 (Clean Version)"""
 
 import os
+import shutil
 from dotenv import load_dotenv
 import gradio as gr
 
@@ -28,12 +29,17 @@ def load_and_index(docx_path: str):
 
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
+    persist_dir = os.path.join(os.path.dirname(__file__), "chroma_docx_db")
+    if os.path.exists(persist_dir):
+        shutil.rmtree(persist_dir)
+    os.makedirs(persist_dir, exist_ok=True)
+
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
-        persist_directory="./chroma_docx_db"
+        persist_directory=persist_dir,
     )
-    print("Vector store created and persisted.")
+    print(f"Vector store created and persisted at {persist_dir}.")
 
     return vectorstore.as_retriever(search_kwargs={"k": 3})
 
@@ -92,6 +98,8 @@ def upload_docx(docx_file):
     if docx_file is None:
         return "No file uploaded.", []
 
+    chain = None
+
     # Get file path from Gradio
     file_path = docx_file.name if hasattr(docx_file, "name") else str(docx_file)
 
@@ -137,7 +145,7 @@ with gr.Blocks(title="Chat with DOCX - Assignment 3") as demo:
         docx_input = gr.File(label="Upload DOCX", type="filepath")
         status = gr.Textbox(label="Status", interactive=False)
 
-    chatbot = gr.Chatbot(label="Conversation", height=450, type="messages")
+    chatbot = gr.Chatbot(label="Conversation", height=450)
     question_input = gr.Textbox(
         placeholder="Ask a question about your DOCX...",
         label="Your Question"
