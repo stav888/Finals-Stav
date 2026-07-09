@@ -1,3 +1,5 @@
+its 03 task
+
 """Chat with DOCX files using RAG — Assignment 3 (Clean Version)"""
 
 import os
