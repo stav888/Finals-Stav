@@ -1,4 +1,4 @@
-"""Chat with DOCX files using RAG — Assignment 3 (Clean Version)"""
+"""Chat with DOCX files using RAG — Assignment 3 (Updated & Clean Version)"""
 
 import os
 import shutil
@@ -9,7 +9,10 @@ from langchain_community.document_loaders import Docx2txtLoader
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain.chains import RetrievalQA
+try:
+    from langchain.chains.retrieval_qa.base import RetrievalQA
+except ImportError:
+    from langchain.chains import RetrievalQA  # גרסה ישנה
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
@@ -81,7 +84,7 @@ def run_auto_evaluation(chain):
         print("Retrieved Context (top 3 chunks):")
         if result.get("source_documents"):
             for j, src in enumerate(result["source_documents"], 1):
-                print(f"\n[{j}] {src.page_content}\n")
+                print(f"\n[{j}] {src.page_content}\n")   # Full context
         else:
             print("No context retrieved.")
 
@@ -100,7 +103,6 @@ def upload_docx(docx_file):
 
     chain = None
 
-    # Get file path from Gradio
     file_path = docx_file.name if hasattr(docx_file, "name") else str(docx_file)
 
     print(f"Indexing: {file_path}")
@@ -129,7 +131,7 @@ def ask_question(question, history):
     if result.get("source_documents"):
         answer += "\n\n📚 Retrieved Context:"
         for i, src in enumerate(result["source_documents"], 1):
-            answer += f"\n\n[{i}] {src.page_content[:350]}..."
+            answer += f"\n\n[{i}] {src.page_content[:450]}..."   # Increased length
 
     return history + [
         {"role": "user", "content": question},
@@ -145,7 +147,7 @@ with gr.Blocks(title="Chat with DOCX - Assignment 3") as demo:
         docx_input = gr.File(label="Upload DOCX", type="filepath")
         status = gr.Textbox(label="Status", interactive=False)
 
-    chatbot = gr.Chatbot(label="Conversation", height=450)
+    chatbot = gr.Chatbot(label="Conversation", height=450, type="messages")
     question_input = gr.Textbox(
         placeholder="Ask a question about your DOCX...",
         label="Your Question"
@@ -176,4 +178,4 @@ with gr.Blocks(title="Chat with DOCX - Assignment 3") as demo:
 
 
 if __name__ == "__main__":
-    demo.launch(server_name="127.0.0.1", server_port=7861)
+    demo.launch(server_name="127.0.0.1", server_port=7860)
