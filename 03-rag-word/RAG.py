@@ -61,11 +61,11 @@ def build_chain(retriever):
 def run_auto_evaluation(chain):
     """Run 5 questions and print answer + full retrieved context."""
     questions = [
-        "What is the main topic of this document?",
-        "Who are the key people or characters mentioned?",
-        "What conclusions or recommendations are given?",
-        "What facts or examples support the main point?",
-        "Summarize the main points.",
+"What is the main topic of this document?",
+    "What are the six foundational concepts in Machine Learning and AI discussed in the document?",
+    "What conclusions or recommendations does the document make regarding learning Machine Learning?",
+    "What are the typical applications of RAG (Retrieval-Augmented Generation) mentioned in the document?",
+    "According to the document, what are the main differences between learning ML and not learning it, and why does it matter?",
     ]
 
     print("\n" + "=" * 95)
