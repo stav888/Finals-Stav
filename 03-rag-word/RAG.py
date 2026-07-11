@@ -16,7 +16,6 @@ except ImportError:
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
-
 def load_and_index(docx_path: str):
     """Load DOCX, chunk it, embed it, and return a retriever."""
     if not os.getenv("OPENAI_API_KEY"):
