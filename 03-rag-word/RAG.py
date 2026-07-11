@@ -12,7 +12,7 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 try:
     from langchain.chains.retrieval_qa.base import RetrievalQA
 except ImportError:
-    from langchain.chains import RetrievalQA  # גרסה ישנה
+    from langchain.chains import RetrievalQA
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
@@ -131,7 +131,7 @@ def ask_question(question, history):
     if result.get("source_documents"):
         answer += "\n\n📚 Retrieved Context:"
         for i, src in enumerate(result["source_documents"], 1):
-            answer += f"\n\n[{i}] {src.page_content[:450]}..."   # Increased length
+            answer += f"\n\n[{i}] {src.page_content[:450]}..."
 
     return history + [
         {"role": "user", "content": question},
