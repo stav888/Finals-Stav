@@ -84,7 +84,7 @@ def run_auto_evaluation(chain):
         print("Retrieved Context (top 3 chunks):")
         if result.get("source_documents"):
             for j, src in enumerate(result["source_documents"], 1):
-                print(f"\n[{j}] {src.page_content}\n")   # Full context
+                print(f"\n[{j}] {src.page_content}\n")
         else:
             print("No context retrieved.")
 
