@@ -1,4 +1,4 @@
-# Finals - Questions & Answers (1-12)
+# Finals - Questions & Answers (1-12) 
 
 ### Q1 - What is tokenization? Give an example - show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
