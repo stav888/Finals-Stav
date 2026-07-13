@@ -32,6 +32,14 @@ TF (term frequency) is just how often a word shows up in a document. IDF (invers
 
 Put them together and TF-IDF boosts words that are common in this document but rare across the whole collection. So "the" gets almost zero - it's everywhere. "Photosynthesis" scores high because it's distinctive to some documents. That's why TF-IDF helps pull out the most informative words.
 
+```
+TF-IDF means Term Frequency × Inverse Document Frequency.
+
+Term Frequency (TF) means the frequency of occurrence of the word in the document. IDF (Inverse Document Frequency) decreases the value of those words which frequently occur in many documents.
+
+Combined, the TF-IDF gives more weight to those words which occur frequently in the document but are not found in other documents. "The" will get very low score because it occurs everywhere while "photosynthesis" will get high score because of its uniqueness.
+```
+
 ---
 
 ### Q4 - What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
@@ -42,6 +50,11 @@ A sentence embedding is a compact numeric vector that captures a sentence's mean
 
 The neat part is that similar sentences end up close together in vector space. This matters because you can measure semantic similarity directly (for example with cosine similarity) and find related sentences even when they don't share the same words.
 
+```
+Sentence embeddings are concise numerical representations that embody the meaning of the sentence. One hot representations, however, merely indicate the presence of certain words and consist mainly of zeroes.
+
+What’s interesting about sentence embeddings is that sentences that have a similar meaning are clustered together in the vector space. The important thing about this feature is that you can compare semantic similarity between sentences without having them share any common words.
+```
 ---
 
 ### Q5 - Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
