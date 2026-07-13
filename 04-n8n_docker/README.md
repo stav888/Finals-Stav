@@ -1,5 +1,11 @@
 # 04 - n8n Docker (Restaurant Chatbot)
 
+```
+table for 3 on anni at 8:45 today
+Bob tomorrow 17:00 6 customers
+make reservation on mina at 22:12 on friday
+```
+
 This folder contains a scaffold for the Restaurant chatbot assignment with n8n webhook integration.
 
 Contents
