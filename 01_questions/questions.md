@@ -89,15 +89,15 @@ This matters because LLMs alone only rely on their training data, which may be o
 
 > Answer:
 
-Ingestion (one-time, offline):
-1) Chunking - split documents into passages or chunks.
-2) Embedding - convert each chunk into a numeric vector.
-3) Indexing / Storage - store those vectors in a vector database.
+Ingestion (single-shot, offline):
+1) Chunking – split up the document into chunks.
+2) Embedding – convert these chunks into vectors.
+3) Indexing/Storage – store these vectors in the vector database.
 
-Query time (when someone asks):
-1) Embed the user's question.
-2) Retrieve the closest chunks.
-3) Generate an answer using those chunks as context.
+During query (when user asks):
+1) Embed the user’s question.
+2) Find the nearest chunks.
+3) Create an answer based on these chunks.
 
 ---
 
