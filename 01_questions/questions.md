@@ -113,7 +113,7 @@ Think of an image as the recipe or blueprint. A container is the cake you bake f
 
 > Answer:
 
-A plain LLM chatbot only generates text from its internal model and the prompt. An AI agent can call tools like web search, a database, or APIs to fetch live data or take actions. For example, a calendar API lets the agent check availability and actually schedule a meeting instead of just suggesting times.
+While a simple LLM-based chatbot merely produces text based on the internal model of the LLM and the prompt, an AI agent can utilize various tools such as searching the web, using a database, or APIs that provide access to live data or enable certain actions. For instance, the calendar API allows scheduling a meeting rather than proposing possible meeting times.
 
 ---
 
@@ -136,7 +136,7 @@ Examples:
 Agent Skills are small, shareable packages that bundle metadata, documentation, and clear instructions. They’re versioned so teams can update and reuse them easily.
 
 A plain prompt is something you type from scratch every time. A Skill is different - it gives the assistant a structured rule for *when* and *how* to act, so the assistant can spot the right moment and apply the Skill automatically without repeated instructions.
-
+ 
 Simple example:
 
 ```xml
