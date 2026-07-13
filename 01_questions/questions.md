@@ -136,7 +136,7 @@ Examples:
 Agent Skills are small, shareable packages that bundle metadata, documentation, and clear instructions. They’re versioned so teams can update and reuse them easily.
 
 A plain prompt is something you type from scratch every time. A Skill is different - it gives the assistant a structured rule for *when* and *how* to act, so the assistant can spot the right moment and apply the Skill automatically without repeated instructions.
- 
+
 Simple example:
 
 ```xml
