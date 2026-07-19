@@ -84,15 +84,15 @@ The final reply will then point to real sources instead of relying only on the m
 
 During ingestion, we do three main things:
 
-1. We split each document into smaller chunks that are easier to work with.
-2. We create embeddings for all of these chunks.
-3. We store the vectors in a vector database or index.
+1. split each document into smaller chunks that are easier to work with.
+2. create embeddings for all of these chunks.
+3. store the vectors in a vector database or index.
 
 At query time:
 
-1. We embed the user's question into a vector.
-2. We search for the closest chunks in the index.
-3. We send those chunks along with the question into the LLM and build an answer that uses this retrieved context.
+1. embed the user's question into a vector.
+2. search for the closest chunks in the index.
+3. send those chunks along with the question into the LLM and build an answer that uses this retrieved context.
 
 ---
 
