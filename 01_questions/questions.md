@@ -42,6 +42,15 @@ A sentence embedding is a compact numeric vector that captures a sentence's mean
 
 The neat part is that similar sentences end up close together in vector space. This matters because you can measure semantic similarity directly (for example with cosine similarity) and find related sentences even when they don't share the same words.
 
+```
+A sentence embedding is a compact numeric vector that captures a sentence's meaning. 
+One-hot vectors, by contrast, only mark which words appear and are mostly zeros.
+
+The useful part is that similar sentences end up close together in vector space. 
+This lets us measure semantic similarity directly (for example with cosine similarity) 
+and find related sentences even when they don't share the same words.
+```
+
 ---
 
 ### Q5 - Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
