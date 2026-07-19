@@ -100,9 +100,9 @@ At query time:
 
 > Answer:
 
-A Docker image is like a recipe or a blueprint: it describes what to install and how to run the application.
-A Docker container is a running instance created from that image, with its own state and lifecycle.
-You can start many containers from the same image, just like you can bake several cakes from one recipe, and each one can end up in a slightly different state while it runs.
+I think of a Docker image as a saved package for an application. It contains the files, libraries, and settings needed to start it.
+A container is what we get when Docker runs that package. It is an actual running process with its own state, so it can be started, stopped, or removed.
+The same image can be used to start several containers, just as one application package can be opened in several separate environments.
 
 ---
 
@@ -110,10 +110,9 @@ You can start many containers from the same image, just like you can bake severa
 
 > Answer:
 
-A simple LLM chatbot only generates text based on its training data and the current prompt.
-An AI agent, on the other hand, can call tools such as web search, databases, or external APIs to get fresh information or perform actions.
-For example, with a calendar API as a tool, the agent can actually create a meeting in the user's calendar instead of just suggesting possible times in the chat.
-This makes the agent more capable because it is not limited to text predictions. It can interact with the outside world.
+A simple LLM chatbot answers from its training data and the prompt it receives. It can suggest a meeting time, but it cannot put that meeting on a calendar by itself.
+An AI agent can call an external tool when it needs information or needs to do something. For example, a calendar API could let it check available times and create the event for the user.
+That is the main difference: the agent can use a system outside the chat, while the basic chatbot only returns text.
 
 ---
 
@@ -121,10 +120,9 @@ This makes the agent more capable because it is not limited to text predictions.
 
 > Answer:
 
-MCP (Model Context Protocol) is a standard way for tools and AI assistants to talk to each other.
-Instead of writing a different custom integration for every tool, an MCP server describes the operations it supports and the assistant can call them in a uniform way.
-This makes it easier and safer to add new tools to systems like GitHub Copilot.
-Examples of what an MCP server might expose include file operations, such as listing and reading project files, and GitHub actions like searching issues or creating pull requests.
+MCP (Model Context Protocol) defines how an AI assistant can discover and use tools provided by another program.
+This solves the problem of building a separate interface for every assistant and every tool. An MCP server lists the actions it supports, and the assistant can request one of those actions in the expected format.
+For example, a server could allow Copilot to list and read files in a project. Another server could connect it to GitHub so it can search issues or create a pull request.
 
 ---
 
@@ -133,10 +131,10 @@ Examples of what an MCP server might expose include file operations, such as lis
 
 > Answer:
 
-Agent Skills are small, reusable definitions that bundle metadata, documentation, and clear instructions for the assistant.
-Because they are versioned and shareable, teams can update them once and reuse them across projects.
-A plain prompt is something the user types ad-hoc each time and the assistant usually forgets it after the session.
-A Skill, in contrast, tells the assistant in a structured way when to apply the behavior and how to do it, so it can recognize relevant situations and act consistently without the user repeating long instructions.
+Agent Skills are small, reusable definitions that bundle metadata, documentation, and instructions for the assistant.
+Teams can version them, update them, and reuse them across projects.
+A plain prompt is typed from scratch each time and usually applies only to that conversation.
+A Skill tells the assistant when to use a behavior and how to follow it, so the result is more consistent without repeating long instructions.
 
 Minimal metadata example:
 
