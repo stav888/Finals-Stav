@@ -1,4 +1,4 @@
-run scripy by this
+run script by this
 ```
 .\.venv\Scripts\python.exe -u .\Finals-Stav\03-rag-word\RAG.py
 ```
