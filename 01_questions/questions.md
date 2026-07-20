@@ -14,7 +14,7 @@ Tokenization splits text into pieces so models can actually work with it. It's t
 
 > Answer:
 
-Stemming: "running" > "run", "better" > "better"
+Stemming: "running" > "run", "better" < "better"
 
 Lemmatization: "running" > "run", "better" > "good"
 
