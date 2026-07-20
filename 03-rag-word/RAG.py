@@ -1,4 +1,4 @@
-"""Chat with DOCX files using RAG — Assignment 3 (Updated & Clean Version)"""
+"""Chat with DOCX files using RAG — Assignment 3"""
 
 import os
 import shutil
@@ -56,7 +56,7 @@ def build_chain(retriever):
     )
 
 
-# ====================== AUTO EVALUATION (for Assignment 3 Screenshot) ======================
+# ====================== AUTO EVALUATION ======================
 def run_auto_evaluation(chain):
     """Run 5 questions and print answer + full retrieved context."""
     questions = [
@@ -89,10 +89,7 @@ def run_auto_evaluation(chain):
 
         print("-" * 95)
 
-
-# Global state
 chain = None
-
 
 def upload_docx(docx_file):
     """Index uploaded DOCX file and run auto evaluation."""
