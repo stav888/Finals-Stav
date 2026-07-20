@@ -1,4 +1,5 @@
-"""Vector DB example using ChromaDB + all-MiniLM-L6-v2.
+"""
+Semantic Book Search Example via ChromaDB & all-MiniLM-L6-v2
 
 Install:
 pip install -r requirements.txt / pip install chromadb sentence-transformers
@@ -60,7 +61,7 @@ collection.add(documents=documents, metadatas=metadatas, ids=ids)
 
 print(f"Collection created with {collection.count()} documents")
 
-# Semantic queries (conceptual, not keyword-copies)
+# Semantic queries
 queries = [
     "books that explain the nature of time and reality",
     "books about the universe and black holes",
@@ -76,7 +77,7 @@ for query in queries:
         include=["documents", "metadatas", "distances"]
     )
     print(f"\n🔍 Query: '{query}'")
-    print("-" * 60)
+    print("-" * 50)
     for doc, meta, dist in zip(
         results["documents"][0],
         results["metadatas"][0],
@@ -85,7 +86,7 @@ for query in queries:
         print(f"  Distance: {dist:.4f}  |  {doc[:80]}...")
         print(f"  Metadata: {meta}")
 
-print("\n" + "=" * 60)
+print("\n" + "=" * 50)
 print("Analysis (5–8 sentences):\n")
 
 print("Q: Which query returned the most relevant results, and why?")
@@ -105,4 +106,4 @@ print("Q: What distance threshold would you use to decide 'this result is releva
 print("A: I would treat distances below 0.55 as strong relevance, 0.55–0.65 as worth checking, and anything above 0.70 as "
       "weak/noisy. These guidelines reflect the small science-books collection here and should be tuned for larger or "
       "more domain-specific corpora.")
-print("=" * 60)
+print("=" * 50)
