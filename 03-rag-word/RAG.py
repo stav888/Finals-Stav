@@ -4,7 +4,7 @@ import os
 import shutil
 from dotenv import load_dotenv
 import gradio as gr
- 
+
 from langchain_community.document_loaders import Docx2txtLoader
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
