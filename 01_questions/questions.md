@@ -7,7 +7,7 @@
 Tokens: ["I", "'m", "learning", "NLP", "in", "2025", "!"]
 
 Tokenization splits text into pieces so models can actually work with it. It's the first step because models need discrete tokens to convert into numbers. In simple terms, you can't feed raw sentences straight into a model; you first break them into tokens.
- 
+
 ---
 
 ### Q2 — What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
