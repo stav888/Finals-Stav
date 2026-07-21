@@ -14,11 +14,20 @@ Tokenization splits text into pieces so models can actually work with it. It's t
 
 > Answer:
 
-Stemming: "running" > "run", "better" > "better"
+Stemming strips suffixes based on rules.
+Lemmatization gives you the original form (lemma) - 
+the actual word you'd find in a dictionary.
 
-Lemmatization: "running" > "run", "better" > "good"
+Take "running":
+- Stemming: run
+- Lemmatization: run
 
-Stemmers chop off endings using quick rules. They're fast, but they can leave odd or non-words. Lemmatizers use a dictionary and grammar tags. They return the real base form, so they keep more meaning. In practice, lemmatization is cleaner but a bit slower.
+Now "better":
+- Stemming: better (basically doesn't change)
+- Lemmatization: good
+
+Lemmatization keeps more meaning because you're getting 
+the real word, not just a chopped-up version.
 
 ---
 
