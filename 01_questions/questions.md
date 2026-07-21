@@ -5,8 +5,11 @@
 > Answer:
 
 Tokenizing just splits text into pieces - words, numbers, punctuation, whatever.
+
 Take "I'm learning NLP in 2025!". It becomes:
+
 ["I", "'m", "learning", "NLP", "in", "2025", "!"]
+
 That way the computer can handle each piece on its own, even with weird punctuation mixed in.
 
 ---
@@ -16,8 +19,7 @@ That way the computer can handle each piece on its own, even with weird punctuat
 > Answer:
 
 Stemming strips suffixes based on rules.
-Lemmatization gives you the original form (lemma) - 
-the actual word you'd find in a dictionary.
+Lemmatization gives you the original form (lemma) - the actual word you'd find in a dictionary.
 
 Take "running":
 - Stemming: run
@@ -27,8 +29,7 @@ Now "better":
 - Stemming: better (basically doesn't change)
 - Lemmatization: good
 
-Lemmatization keeps more meaning because you're getting 
-the real word, not just a chopped-up version.
+Lemmatization keeps more meaning because you're getting the real word, not just a chopped-up version.
 
 ---
 
