@@ -26,10 +26,19 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 
 > Answer:
 
-TF-IDF means Term Frequency times Inverse Document Frequency.
-Term frequency is simply how many times a word appears in one document. Inverse document frequency pushes down the score of words that appear in almost every document.
-When you multiply them, you get a score that favors words that are common in this specific document but not common in the whole collection.
-That is why "the" gets close to zero. It appears everywhere. "Photosynthesis" gets a higher score because it only shows up in certain science texts and helps describe them better.
+TF-IDF is about finding words that actually matter.
+
+"The" appears almost everywhere — in news, books, emails.  
+So it doesn't help us understand what makes a document special.
+
+"Photosynthesis" is rare. It mostly shows up in science texts.  
+If a document uses it a lot, it's probably about biology.
+
+The idea is simple: look for words that are  
+1. Common in THIS document  
+2. Rare in OTHER documents  
+
+Those are the words that tell you what the document is really about.
 
 
 ---
