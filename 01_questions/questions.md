@@ -26,17 +26,19 @@ Stemmers chop off endings using quick rules. They're fast, but they can leave od
 
 > Answer:
 
+TF-IDF means Term Frequency times Inverse Document Frequency.
+
 TF-IDF is about finding words that actually matter.
 
-"The" appears almost everywhere — in news, books, emails.  
+"The" appears almost everywhere - in news, books, emails.
 So it doesn't help us understand what makes a document special.
 
-"Photosynthesis" is rare. It mostly shows up in science texts.  
+"Photosynthesis" is rare. It mostly shows up in science texts. 
 If a document uses it a lot, it's probably about biology.
 
-The idea is simple: look for words that are  
-1. Common in THIS document  
-2. Rare in OTHER documents  
+The idea is simple: look for words that are
+1. Common in THIS document
+2. Rare in OTHER documents
 
 Those are the words that tell you what the document is really about.
 
