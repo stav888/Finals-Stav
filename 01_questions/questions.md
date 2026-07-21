@@ -60,11 +60,10 @@ Those are the words that tell you what the document is really about.
 
 > Answer:
 
-A sentence embedding is basically one vector that captures what the whole sentence means. Similar sentences end up close together in space.
-
-One-hot encoding is different - it gives every word its own slot, a vector full of zeros with a single 1. So "cat" and "kitten" are totally unrelated, even though they mean almost the same thing.
-
-The big advantage with embeddings is you can actually check if two sentences mean the same thing - like with cosine similarity. With one-hot, you just can't do that.
+A sentence embedding is a numeric vector that tries to capture the meaning of a whole sentence, not just which words are inside it.
+A one-hot vector just marks presence or absence of words and is mostly zeros, so it cannot express similarity between different sentences.
+With embeddings, sentences that talk about similar topics end up close together in the vector space.
+This is useful because we can measure semantic similarity, for example with cosine similarity, and find related sentences even if they use different wording.
 
 ---
 
