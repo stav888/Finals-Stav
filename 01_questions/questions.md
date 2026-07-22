@@ -29,7 +29,6 @@ However, in the case of the word “better”:
 - Lemmatization: good
 
 There is more information retained in lemmatization since you get the actual word.
-
 ---
 
 ### Q3 — What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
