@@ -20,15 +20,15 @@ That way the computer can handle each piece on its own, even with weird punctuat
 
 The stem removal process involves removing the suffixes according to rules. The lemma gives you the root form (lemma) – the actual word in the dictionary.
 
-For instance: "running"
+For example: “running”
 - Stemming: run
 - Lemmatization: run
 
-However, the word "better":
-- Stemming: better (remains basically unchanged)
+However, in the case of the word “better”:
+- Stemming: better (remains the same)
 - Lemmatization: good
 
-Lemmatization keeps more meaning because you're getting the real word, not just a chopped-up version.
+There is more information retained in lemmatization since you get the actual word.
 
 ---
 
