@@ -70,10 +70,10 @@ The big advantage with embeddings is you can actually check if two sentences mea
 
 > Answer:
 
-Cosine similarity looks at the angle between two vectors.
-If the angle is small and the vectors point in almost the same direction, the similarity is high, which means the two documents talk about similar things.
-If the vectors point in very different directions, the similarity score is low, even if the documents are long.
-The useful part is that cosine similarity ignores the length of the vectors, so a short note and a long article on the same topic can still be considered very similar.
+Cosine similarity calculates the angle between two vectors.
+If two document vectors point in almost the same direction, it usually means the documents are similar in meaning, even if they don’t use exactly the same words.
+
+That’s why cosine similarity is often better than Euclidean distance for embeddings: cosine focuses on direction (meaning), while Euclidean distance is more affected by vector length.
 
 ---
 
