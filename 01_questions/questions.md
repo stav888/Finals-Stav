@@ -53,7 +53,6 @@ The idea is simple: look for words that are
 
 Those are the words that tell you what the document is really about.
 
-
 ---
 
 ### Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
