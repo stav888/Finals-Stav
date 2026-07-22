@@ -18,7 +18,7 @@ That way the computer can handle each piece on its own, even with weird punctuat
 
 > Answer:
 
-The stem removal process involves removing the suffixes according to rules. The lemma gives you the root form (lemma) – the actual word in the dictionary.
+The Stemming removal process involves removing the suffixes according to rules. The lemma gives you the root form (lemma) – the actual word in the dictionary.
 
 For example: “running”
 - Stemming: run
