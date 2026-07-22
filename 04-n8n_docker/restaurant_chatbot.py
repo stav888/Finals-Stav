@@ -17,7 +17,6 @@ from restaurant_db import (
     get_reservations,
 )
 
-
 env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
 load_dotenv(env_path)
 
@@ -43,8 +42,31 @@ class RestaurantChatbot:
             self.llm = None
 
     def classify_question(self, question: str) -> str:
+        """PRIMARY: Use LLM first. FALLBACK: Use keywords if LLM fails."""
+        
+        # 1️⃣ PRIMARY: LLM FIRST
+        if self.llm:
+            try:
+                classify_prompt = ChatPromptTemplate.from_messages([
+                    ("system", "Classify into: reservation, cancellation, menu, hours, general. Return ONLY the word."),
+                    ("human", "{question}")
+                ])
+                result = (classify_prompt | self.llm | StrOutputParser()).invoke({"question": question}).strip().lower()
+                
+                valid_categories = {"reservation", "cancellation", "menu", "hours", "general"}
+                if result in valid_categories:
+                    print(f"🤖 LLM Classified as: {result}")
+                    return result
+                else:
+                    print(f"⚠️ LLM returned invalid category '{result}', falling back to keywords.")
+            except Exception as e:
+                print(f"⚠️ LLM classification failed ({e}), falling back to keywords.")
+
+        # 2️⃣ FALLBACK: Keywords only if LLM missing/failed
+        print("⚠️ Using keyword-based fallback")
         question_lower = question.lower()
-        if any(kw in question_lower for kw in ["book", "reserve", "reservation", "table for", "table", "order table", "booking"]):
+        
+        if any(kw in question_lower for kw in ["book", "reserve", "reservation", "table for", "table", "booking", "order table"]):
             return "reservation"
         elif any(kw in question_lower for kw in ["cancel", "cancellation", "remove reservation"]):
             return "cancellation"
@@ -53,21 +75,11 @@ class RestaurantChatbot:
         elif any(kw in question_lower for kw in ["open", "close", "hours", "time", "when", "schedule"]):
             return "hours"
         
-        if self.llm:
-            try:
-                classify_prompt = ChatPromptTemplate.from_messages([
-                    ("system", "Classify into: reservation, cancellation, menu, hours, general. Return ONLY the word."),
-                    ("human", "{question}")
-                ])
-                result = (classify_prompt | self.llm | StrOutputParser()).invoke({"question": question}).strip().lower()
-                return result if result in {"reservation", "cancellation", "menu", "hours", "general"} else "general"
-            except Exception:
-                pass
         return "general"
 
     def answer(self, question: str) -> str:
         category = self.classify_question(question)
-        print(f" Classified as: {category}")
+        print(f"📋 Final classification: {category}")
 
         if category == "reservation": return self._handle_reservation(question)
         elif category == "cancellation": return self._handle_cancellation(question)
@@ -84,7 +96,6 @@ class RestaurantChatbot:
         return self._extract_reservation_keywords(question)
 
     def _extract_with_llm(self, question: str) -> str:
-        
         current_real_date = datetime.now().strftime("%Y-%m-%d")
         
         extract_prompt = ChatPromptTemplate.from_messages([
@@ -100,9 +111,9 @@ class RestaurantChatbot:
         print(f" Extracting from: '{question}'")
         
         # 1. Extract party size
-        party_match = re.search(r'for\s+(\d+)\s*(people|person|guests|ppl)?', question, re.IGNORECASE)
+        party_match = re.search(r'for\s+(\d+)\s*(people|person|guests|ppl|customers)?', question, re.IGNORECASE)
         if not party_match:
-            party_match = re.search(r'(\d+)\s*(people|person|guests|ppl)', question, re.IGNORECASE)
+            party_match = re.search(r'(\d+)\s*(people|person|guests|ppl|customers)', question, re.IGNORECASE)
         party_size = int(party_match.group(1)) if party_match else 2
         print(f"  👥 Party size: {party_size}")
         
@@ -113,6 +124,7 @@ class RestaurantChatbot:
         time_str = time_match.group(1).strip() if time_match else None
         print(f"  🕐 Time: {time_str}")
         
+        # 3. Extract date
         date_str = None
         question_lower = question.lower()
         
@@ -130,23 +142,36 @@ class RestaurantChatbot:
                     date_str = date_match.group(1)
         print(f"  📅 Date: {date_str}")
         
-        # 4. Extract name
+        # 4. Extract name (IMPROVED: Handles "on [name]" pattern)
         customer_name = "Guest"
+        
+        # Try explicit indicators first
         name_match = re.search(r'(?:my name is|name is|name:|i am|i\'m)\s*([A-Za-z]+)', question, re.IGNORECASE)
         if name_match:
             customer_name = name_match.group(1).capitalize()
             print(f"  👤 Name (explicit): {customer_name}")
         else:
-            cleaned_q = re.sub(r'for\s+\d+\s*(people|person|guests|ppl)?', '', question, flags=re.IGNORECASE)
+            # Remove "for X people/customers" to avoid confusing numbers with names
+            cleaned_q = re.sub(r'for\s+\d+\s*(people|person|guests|ppl|customers)?', '', question, flags=re.IGNORECASE)
+            
+            # Try "for [Name]"
             name_match = re.search(r'\bfor\s+([a-zA-Z]+)\b', cleaned_q)
             if name_match:
                 customer_name = name_match.group(1).capitalize()
                 print(f"  👤 Name (from 'for'): {customer_name}")
             else:
-                name_match = re.search(r'\b([A-Z][a-z]+)\'s\b', question)
+                # Try "on [Name]" (e.g., "reservation on mina", "table for 3 on anni")
+                time_cleaned_q = re.sub(r'at\s+\d{1,2}[:.]\d{2}', '', cleaned_q, flags=re.IGNORECASE)
+                name_match = re.search(r'\bon\s+([a-zA-Z]+)\b', time_cleaned_q)
                 if name_match:
-                    customer_name = name_match.group(1)
-                    print(f"  👤 Name (possessive): {customer_name}")
+                    customer_name = name_match.group(1).capitalize()
+                    print(f"  👤 Name (from 'on'): {customer_name}")
+                else:
+                    # Try "[Name]'s" (possessive)
+                    name_match = re.search(r'\b([A-Z][a-z]+)\'s\b', question)
+                    if name_match:
+                        customer_name = name_match.group(1)
+                        print(f"  👤 Name (possessive): {customer_name}")
         
         if not time_str:
             return "Please provide the time for your reservation (e.g., '19:55' or '7 PM')."
@@ -196,7 +221,7 @@ class RestaurantChatbot:
             return "Sorry, there was an error processing your reservation."
 
     def _handle_cancellation(self, question: str) -> str:
-        print(f" Processing cancellation: '{question}'")
+        print(f"🔍 Processing cancellation: '{question}'")
         match = re.search(r'\b(\d+)\b', question)
         if match:
             res_id = int(match.group(1))
