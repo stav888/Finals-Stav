@@ -26,6 +26,7 @@ For example: “running”
 - Lemmatization: run
 
 But the word “better”:
+
 - Stemming: better (remains the same)
 - Lemmatization: good
 
