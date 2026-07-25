@@ -14,7 +14,7 @@ Data is stored in SQLite and real-time notifications are sent to Telegram throug
 ├─ docker-compose.yml         # n8n Docker setup
 ├─ requirements.txt
 ├─ env                        # Environment variables
-└─ README.md
+└── README.md
 ```
 
 ## Setup
