@@ -1,86 +1,168 @@
 {
-  "name": "Restaurant Webhook - reservation/cancellation",
+  "name": "Restaurant Webhook - reservation/cancellation + Telegram",
   "nodes": [
     {
       "parameters": {
-        "path": "restaurant",
         "httpMethod": "POST",
-        "responseMode": "lastNode"
+        "path": "restaurant",
+        "responseMode": "responseNode",
+        "options": {}
       },
-      "id": "1",
+      "id": "webhook-1",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [250, 250]
+      "typeVersion": 2,
+      "position": [
+        240,
+        304
+      ],
+      "webhookId": "restaurant"
     },
     {
       "parameters": {
         "conditions": {
-          "string": [
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
             {
-              "value1": "={{ $json.body.event }}",
-              "operation": "equal",
-              "value2": "reservation"
+              "id": "cond-event",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "reservation",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
             }
-          ]
-        }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
-      "id": "2",
-      "name": "IF",
+      "id": "if-1",
+      "name": "IF Event",
       "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [450, 250]
+      "typeVersion": 2,
+      "position": [
+        480,
+        304
+      ]
     },
     {
       "parameters": {
-        "responseCode": 200,
-        "responseData": {
-          "type": "json",
-          "json": "={\"message\": \"Reservation received\", \"id\": $json.id, \"detail\": $json }"
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"status\": \"ok\",\n  \"message\": \"Reservation received and notified via Telegram\",\n  \"id\": $json.body.id\n} }}",
+        "options": {
+          "responseCode": 200
         }
       },
-      "id": "3",
+      "id": "respond-res",
       "name": "Respond Reservation",
       "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1,
-      "position": [650, 160]
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        256
+      ]
     },
     {
       "parameters": {
-        "responseCode": 200,
-        "responseData": {
-          "type": "json",
-          "json": "={\"message\": \"Cancellation received\", \"id\": $json.id, \"detail\": $json }"
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"status\": \"ok\",\n  \"message\": \"Cancellation received and notified via Telegram\",\n  \"id\": $json.body.id\n} }}",
+        "options": {
+          "responseCode": 200
         }
       },
-      "id": "4",
+      "id": "respond-cancel",
       "name": "Respond Cancellation",
       "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1,
-      "position": [650, 340]
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "509252065",
+        "text": "=❌ *Reservation Cancelled*\n\n🆔 Booking #{{ $json.body.id }}\n\nThe reservation has been cancelled.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        416
+      ],
+      "id": "274bc70a-3746-4cf4-9bd6-1aa59560319d",
+      "name": "cancel reservation",
+      "webhookId": "3f175223-543f-400c-bed9-46516893323b",
+      "credentials": {
+        "telegramApi": {
+          "id": "nJ8uypuunOlctqNz",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "509252065",
+        "text": "=🍽 *New Reservation*\n\n👤 Name: {{ $json.body.customer_name }}\n📅 Date: {{ $json.body.date }}\n🕐 Time: {{ $json.body.time }}\n👥 Party: {{ $json.body.party_size }}\n📞 Contact: {{ $json.body.contact || \"N/A\" }}\n🆔 Booking #{{ $json.body.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        240
+      ],
+      "id": "294c727c-a37c-4011-865b-fb4864c6a91f",
+      "name": "make reseration",
+      "webhookId": "3f175223-543f-400c-bed9-46516893323b",
+      "credentials": {
+        "telegramApi": {
+          "id": "nJ8uypuunOlctqNz",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
+  "pinData": {},
   "connections": {
     "Webhook": {
       "main": [
         [
           {
-            "node": "IF",
+            "node": "IF Event",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "IF": {
+    "IF Event": {
       "main": [
         [
           {
-            "node": "Respond Reservation",
+            "node": "make reseration",
             "type": "main",
             "index": 0
           }
         ],
+        [
+          {
+            "node": "cancel reservation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancel reservation": {
+      "main": [
         [
           {
             "node": "Respond Cancellation",
@@ -89,8 +171,29 @@
           }
         ]
       ]
+    },
+    "make reseration": {
+      "main": [
+        [
+          {
+            "node": "Respond Reservation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "active": false,
-  "settings": {}
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "503edf9a-ab07-4c70-a421-823dcc134a20",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aa7c12e5a6a1a5b3f750af473dd5aa3e7124c9c7b5617f0c707c60cc5d3d4a75"
+  },
+  "id": "restaurant-webhook-telegram",
+  "tags": []
 }
