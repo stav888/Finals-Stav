@@ -106,17 +106,13 @@ For example: A chatbot answering questions about company policies without RAG mi
 
 > Answer:
 
-During ingestion, we do three main things:
+Ingestion time (loading documents):
 
-1. split each document into smaller chunks that are easier to work with.
-2. create embeddings for all of these chunks.
-3. store the vectors in a vector database or index.
+First, documents are broken into smaller pieces. Each piece becomes an embedding. Then all embeddings get saved in a vector database.
 
-At query time:
+Query time (user asks a question):
 
-1. embed the user's question into a vector.
-2. search for the closest chunks in the index.
-3. send those chunks along with the question into the LLM and build an answer that uses this retrieved context.
+The question gets converted to an embedding. The system finds the most similar embeddings from the database. Finally, those matching pieces are sent to the LLM so it can write an answer.
 
 ---
 
