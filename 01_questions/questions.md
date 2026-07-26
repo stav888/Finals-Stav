@@ -94,10 +94,11 @@ That way we can retrieve chunks that are close in meaning to the question, not o
 
 > Answer:
 
-RAG connects an LLM to real documents so it can ground its answers in actual data instead of guessing.
-This reduces hallucinations and lets the model use information that is either private or more up to date than its training set.
-For example, in a support bot, we can use RAG to fetch the relevant customer record and the latest policy document before answering.
-The final reply will then point to real sources instead of relying only on the model's internal knowledge.
+RAG gives an LLM actual documents to read, so it answers based on real information instead of guessing.
+
+This prevents hallucinations and lets it use private or recent data that wasn't in its training.
+
+For example: A chatbot answering questions about company policies without RAG might give wrong information from memory. With RAG, it pulls the actual policy document first, so it gives accurate answers with real sources.
 
 ---
 
