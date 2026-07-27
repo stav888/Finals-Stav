@@ -95,7 +95,7 @@
       "typeVersion": 1.2,
       "position": [
         736,
-        416
+        432
       ],
       "id": "274bc70a-3746-4cf4-9bd6-1aa59560319d",
       "name": "cancel reservation",
@@ -189,12 +189,11 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "503edf9a-ab07-4c70-a421-823dcc134a20",
+  "versionId": "ec828b42-d9c3-484e-9497-5f1b68bf64c9",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "aa7c12e5a6a1a5b3f750af473dd5aa3e7124c9c7b5617f0c707c60cc5d3d4a75"
   },
-  "webhookUrl": "http://localhost:5678/webhook/restaurant",
   "id": "restaurant-webhook-telegram",
   "tags": []
 }
