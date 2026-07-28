@@ -1,6 +1,6 @@
-# Finals — Questions & Answers (1–12)
+# Finals - Questions & Answers (1-12)
 
-### Q1 — What is tokenization? Give an example — show how the sentence "I'm learning NLP in 2025!" would be tokenized.
+### Q1 - What is tokenization? Give an example - show how the sentence "I'm learning NLP in 2025!" would be tokenized.
 
 > Answer:
 
@@ -14,18 +14,18 @@ That way the computer can handle each piece on its own, even with weird punctuat
 
 ---
 
-### Q2 — What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
+### Q2 - What is the difference between stemming and lemmatization? Apply both to the words "running" and "better" and explain which preserves more linguistic meaning.
 
 > Answer:
 
 Stemming strips suffixes based on rules.
-Lemmatization gives you the original form (lemma) — the actual word you'd find in a dictionary.
+Lemmatization gives you the original form (lemma) - the actual word you'd find in a dictionary.
 
-For example: “running”
+For example: "running"
 - Stemming: run
 - Lemmatization: run
 
-But the word “better”:
+But the word "better":
 - Stemming: better (remains the same)
 - Lemmatization: good
 
@@ -33,7 +33,7 @@ Lemmatization keeps more meaning because you get the real word, not just a chopp
 
 ---
 
-### Q3 — What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
+### Q3 - What does TF-IDF stand for? Explain in plain language why the word "the" scores almost zero in TF-IDF, while the word "photosynthesis" would score high.
 
 > Answer:
 
@@ -55,7 +55,7 @@ Those are the words that tell you what the document is really about.
 
 ---
 
-### Q4 — What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
+### Q4 - What is a sentence embedding? How is it fundamentally different from one-hot encoding? Give one advantage embeddings have that one-hot vectors don't.
 
 > Answer:
 
@@ -67,19 +67,19 @@ The big advantage with embeddings is you can actually check if two sentences mea
 
 ---
 
-### Q5 — Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
+### Q5 - Explain cosine similarity in plain language. If two document vectors point in almost the same direction, what does that tell us about the documents they represent?
 
 > Answer:
 
 Cosine similarity calculates the angle between two vectors.
 
-If two document vectors point in almost the same direction, it usually means the documents are similar in meaning, even if they don’t use exactly the same words.
+If two document vectors point in almost the same direction, it usually means the documents are similar in meaning, even if they don't use exactly the same words.
 
-That’s why cosine similarity is often better than Euclidean distance for embeddings: cosine focuses on direction, while Euclidean distance is more affected by vector length.
+That's why cosine similarity is often better than Euclidean distance for embeddings: cosine focuses on direction, while Euclidean distance is more affected by vector length.
 
 ---
 
-### Q6 — Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
+### Q6 - Why can't a regular SQL query like `WHERE description LIKE '%pizza%'` find semantically similar documents? What does a vector index solve that SQL can't?
 
 > Answer:
 
@@ -90,7 +90,7 @@ That way we can retrieve chunks that are close in meaning to the question, not o
 
 ---
 
-### Q7 — What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
+### Q7 - What problem does RAG solve that a plain LLM (without RAG) cannot? Give a concrete example of when you would choose RAG over just prompting the LLM directly.
 
 > Answer:
 
@@ -102,7 +102,7 @@ For example: A chatbot answering questions about company policies without RAG mi
 
 ---
 
-### Q8 — Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
+### Q8 - Describe the 3 main steps of a RAG pipeline in the correct order. Be clear about what happens at ingestion time (when you load documents) vs query time (when a user asks a question).
 
 > Answer:
 
@@ -116,17 +116,20 @@ The question gets converted to an embedding. The system finds the most similar e
 
 ---
 
-### Q9 — What is the difference between a Docker image and a Docker container? Use an analogy to explain.
+### Q9 - What is the difference between a Docker image and a Docker container? Use an analogy to explain.
 
 > Answer:
 
-I think of a Docker image as a saved package for an application. It contains the files, libraries, and settings needed to start it.
-A container is what we get when Docker runs that package. It is an actual running process with its own state, so it can be started, stopped, or removed.
-The same image can be used to start several containers, just as one application package can be opened in several separate environments.
+Docker image is like a recipe - it contains all the instructions and ingredients needed to run an application.
+
+A Docker container is what you get when you actually run that recipe - it's the live, running instance. 
+You can start, stop, or delete containers, but the image stays the same.
+
+The same image can launch many containers, just like one recipe can make many cakes.
 
 ---
 
-### Q10 — What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
+### Q10 - What is the difference between a simple LLM chatbot and an AI agent with tools? Give one concrete example of a "tool" and explain why it makes the agent more capable.
 
 > Answer:
 
@@ -136,7 +139,7 @@ That is the main difference: the agent can use a system outside the chat, while 
 
 ---
 
-### Q11 — What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
+### Q11 - What is MCP (Model Context Protocol)? What problem does it solve for AI coding assistants like GitHub Copilot? Name two examples of things an MCP server might expose to an AI assistant.
 
 > Answer:
 
@@ -147,7 +150,7 @@ For example, a server could allow Copilot to list and read files in a project. A
 ---
 
 
-### Q12 — What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
+### Q12 - What are Agent Skills in the context of AI coding assistants? How are they different from just writing instructions in a plain prompt? Show a minimal example of what a skill's .md metadata block might look like.
 
 > Answer:
 
