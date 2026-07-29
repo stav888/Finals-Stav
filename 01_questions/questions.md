@@ -134,7 +134,6 @@ The same image can launch many containers, just like one recipe can make many ca
 > Answer:
 
 a simple chatbot can only write text based on what it learned. It might suggest a meeting time, but it can't actually book it.
-
 an AI agent can use tools to do real things.
 
 for example, a calendar tool lets it check availability and create the event automatically.
