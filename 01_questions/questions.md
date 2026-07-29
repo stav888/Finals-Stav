@@ -133,9 +133,13 @@ The same image can launch many containers, just like one recipe can make many ca
 
 > Answer:
 
-A simple LLM chatbot answers from its training data and the prompt it receives. It can suggest a meeting time, but it cannot put that meeting on a calendar by itself.
-An AI agent can call an external tool when it needs information or needs to do something. For example, a calendar API could let it check available times and create the event for the user.
-That is the main difference: the agent can use a system outside the chat, while the basic chatbot only returns text.
+a simple chatbot can only write text based on what it learned. It might suggest a meeting time, but it can't actually book it.
+
+an AI agent can use tools to do real things.
+
+for example, a calendar tool lets it check availability and create the event automatically.
+
+the difference is that chatbot just talks, while an agent can take action.
 
 ---
 
