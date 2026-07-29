@@ -17,8 +17,17 @@ from restaurant_db import (
     get_reservations,
 )
 
-env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
-load_dotenv(env_path)
+# 🔥 ROBUST ENV LOADING: try both 'env' and '.env'
+base_dir = os.path.dirname(os.path.abspath(__file__))
+for name in ("env", ".env"):
+    p = os.path.join(base_dir, name)
+    if os.path.exists(p):
+        load_dotenv(p)
+        print(f"Loaded environment from: {p}")
+        break
+else:
+    # no env file found; still continue (env may be exported externally)
+    print("No env file found (checked 'env' and '.env'); relying on environment variables.")
 
 
 class RestaurantChatbot:
@@ -143,7 +152,8 @@ class RestaurantChatbot:
         print(f"  📅 Date: {date_str}")
         
         # 4. Extract name (IMPROVED: Handles "on [name]" pattern)
-        customer_name = "Guest"
+        # Do not default to 'Guest' so we can ask for name explicitly
+        customer_name = None
         
         # Try explicit indicators first
         name_match = re.search(r'(?:my name is|name is|name:|i am|i\'m)\s*([A-Za-z]+)', question, re.IGNORECASE)
@@ -190,8 +200,14 @@ class RestaurantChatbot:
 
     def _process_reservation(self, details: dict) -> str:
         required = ["customer_name", "date", "time", "party_size"]
-        if not all(details.get(k) for k in required):
-            return "I need your name, date, time, and party size. Example: 'Table for 2 tonight at 19:55, name is Sara'"
+        # Treat placeholder names like 'Guest' as missing and require explicit name
+        name_val = details.get("customer_name")
+        if not all(details.get(k) for k in required) or (isinstance(name_val, str) and name_val.strip().lower() == "guest"):
+            return "Please provide your name, date, time, and party size. Example: 'Table for 2 tonight at 19:55, name is Sara'"
+        # Validate opening hours before persisting
+        is_open, reason = self._is_open(details.get("date"), str(details.get("time")))
+        if not is_open:
+            return reason
 
         try:
             res_id = book_reservation(
@@ -236,7 +252,7 @@ class RestaurantChatbot:
             
             if reservation['status'] == 'cancelled':
                 print(f"  ⚠️ Reservation #{res_id} already cancelled")
-                return f"⚠️ Reservation #{res_id} is already cancelled."
+                return f"️ Reservation #{res_id} is already cancelled."
             
             print(f"  🔄 Attempting to cancel reservation #{res_id}...")
             success = cancel_reservation(self.db_path, res_id)
@@ -266,24 +282,92 @@ class RestaurantChatbot:
         return (prompt | self.llm | StrOutputParser()).invoke({"question": question})
 
     def _handle_hours(self, question: str) -> str:
-        if not self.llm: return "We are open Sunday–Thursday 12:00–23:00, Friday–Saturday 12:00–01:00."
-        prompt = ChatPromptTemplate.from_messages([("system", "You are a helpful restaurant assistant. Answer hours/location questions briefly."), ("human", "{question}")])
-        return (prompt | self.llm | StrOutputParser()).invoke({"question": question})
+        # Provide a consistent hours reply and a simple follow-up question.
+        # Avoid asking for the restaurant name; keep it brief and helpful.
+        return "We're open Sunday–Thursday 12:00–23:00, Friday–Saturday 12:00–01:00. Which day or time would you like details for?"
 
     def _handle_general(self, question: str) -> str:
         if not self.llm: return "Welcome to our restaurant! How can I help you today?"
         prompt = ChatPromptTemplate.from_messages([("system", "You are a helpful restaurant assistant."), ("human", "{question}")])
         return (prompt | self.llm | StrOutputParser()).invoke({"question": question})
 
+    def _is_open(self, date_str: str, time_str: str):
+        """Return (True, None) if open, otherwise (False, message)."""
+        if not date_str or not time_str:
+            return True, None
+
+        # Resolve date_str to a concrete date
+        try:
+            # If already YYYY-MM-DD
+            date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
+        except Exception:
+            # Try weekday name
+            weekdays = {
+                'monday': 0, 'tuesday': 1, 'wednesday': 2, 'thursday': 3,
+                'friday': 4, 'saturday': 5, 'sunday': 6
+            }
+            ds = date_str.strip().lower()
+            if ds in weekdays:
+                today = datetime.now().date()
+                target_wd = weekdays[ds]
+                days_ahead = (target_wd - today.weekday() + 7) % 7
+                if days_ahead == 0:
+                    days_ahead = 7
+                date_obj = today + timedelta(days=days_ahead)
+            else:
+                # Fallback: don't block if unparseable
+                return True, None
+
+        # Parse time
+        t = None
+        for fmt in ("%H:%M", "%I:%M %p", "%I %p", "%H.%M"):
+            try:
+                t = datetime.strptime(time_str.strip(), fmt).time()
+                break
+            except Exception:
+                continue
+        if t is None:
+            # If time not parseable, allow and let user re-enter
+            return True, None
+
+        dt = datetime.combine(date_obj, t)
+
+        # Business hours config
+        # Sunday–Thursday 12:00–23:00, Friday–Saturday 12:00–01:00 (closing after midnight)
+        weekday = dt.weekday()  # Mon=0 .. Sun=6
+        if weekday in (6, 0, 1, 2, 3):
+            open_time = datetime.combine(date_obj, datetime.strptime("12:00", "%H:%M").time())
+            close_time = datetime.combine(date_obj, datetime.strptime("23:00", "%H:%M").time())
+        else:
+            # Friday (4) and Saturday (5)
+            open_time = datetime.combine(date_obj, datetime.strptime("12:00", "%H:%M").time())
+            close_time = datetime.combine(date_obj, datetime.strptime("01:00", "%H:%M").time())
+            # close_time is next day
+            if close_time <= open_time:
+                close_time = close_time + timedelta(days=1)
+
+        if open_time <= dt < close_time:
+            return True, None
+        else:
+            hours_msg = (
+                "Sorry, we're closed at that time.\n"
+                "Hours: Sunday–Thursday 12:00–23:00, Friday–Saturday 12:00–01:00."
+            )
+            return False, hours_msg
+
     def _notify_n8n(self, data: dict, event: str) -> None:
         webhook_url = os.getenv("N8N_WEBHOOK_URL")
         if not webhook_url:
             print("⚠️  No N8N_WEBHOOK_URL configured in .env")
             return
+        # 🔥 Ensure 'event' is included in the payload so n8n IF node can route
+        payload = {**data, "event": event}
+
         try:
             print(f"📤 Sending webhook to n8n: {webhook_url}")
-            print(f"   Event: {event}, Data: {data}")
-            response = requests.post(webhook_url, json=data, timeout=5)
+            print(f"   Event: {event}")
+            print(f"   Payload: {payload}")
+            response = requests.post(webhook_url, json=payload, timeout=5)
             print(f"✅ n8n notification sent: {response.status_code}")
         except Exception as e:
             print(f"❌ n8n notification failed: {e}")
@@ -292,15 +376,37 @@ class RestaurantChatbot:
 if __name__ == "__main__":
     import gradio as gr
     bot = RestaurantChatbot()
-    def respond(message, history): return bot.answer(message)
-    demo = gr.ChatInterface(
-        fn=respond,
-        title="🍽️ Restaurant Reservation Assistant",
-        description="Book tables, cancel reservations, or ask about our menu and hours",
-        examples=[
-            "Order table for Lina at 19:55 tonight for 4",
-            "Cancel reservation number 5",
-            "What do you have for dessert?",
-        ],
-    )
-    demo.launch()
+
+    def chat_submit(message, history):
+        if not message or not message.strip():
+            return history, ""
+        reply = bot.answer(message)
+        history = history or []
+        history.append({"role": "user", "content": message})
+        history.append({"role": "assistant", "content": reply})
+        return history, ""
+
+    with gr.Blocks(title="AI Chatbot Assistant") as demo:
+        gr.Markdown("A restaurant booking assistant integrated with n8n and Telegram for reservation and cancellation workflows.")
+        chatbot = gr.Chatbot(height=500)
+        textbox = gr.Textbox(placeholder="Type your message here...", lines=1, max_lines=1, show_label=False)
+
+        with gr.Row():
+            submit_btn = gr.Button("Send")
+
+        submit_btn.click(chat_submit, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
+        textbox.submit(chat_submit, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
+
+        # Examples placed below controls. Clicking will populate the textbox but NOT auto-submit.
+        gr.Examples(
+            examples=[
+                "Order table for Lina at 19:55 tonight for 4",
+                "Cancel reservation 5",
+                "What do you have for dessert?",
+            ],
+            inputs=[textbox],
+            label="Examples (click to populate, then press Send to confirm)",
+            cache_examples=False,
+        )
+
+    demo.launch(share=False, server_name="127.0.0.1", server_port=7860)
