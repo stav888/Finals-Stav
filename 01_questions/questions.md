@@ -163,21 +163,20 @@ A web search server that lets it look up information online
 
 > Answer:
 
-Agent Skills are small, reusable definitions that bundle metadata, documentation, and instructions for the assistant.
-Teams can version them, update them, and reuse them across projects.
-A plain prompt is typed from scratch each time and usually applies only to that conversation.
-A Skill tells the assistant when to use a behavior and how to follow it, so the result is more consistent without repeating long instructions.
+Agent Skills are pre-built instruction packages that the AI can reuse across many projects.
+
+A normal prompt is typed once for one chat. A Skill is saved, organized, and used over and over — so the AI behaves consistently without you having to rewrite everything.
 
 Minimal metadata example:
 
 ```xml
 <skill>
-  <name>docker-compose-debugger</name>
+  <name>docker-debugger</name>
   <description>
-    Help debug Docker Compose issues.
-    Use when the user asks about containers that won't start
-    or Docker errors related to services.
+    Helps fix Docker problems.
+    Activate when the user talks about containers not starting
+    or service failures.
   </description>
-  <file>skills/docker-compose-debugger/SKILL.md</file>
+  <file>skills/docker-debugger/SKILL.md</file>
 </skill>
 ```
