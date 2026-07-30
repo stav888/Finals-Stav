@@ -83,8 +83,11 @@ That's why cosine similarity is often better than Euclidean distance for embeddi
 
 > Answer:
 
- A `LIKE '%pizza%'` query only does exact substring matching.
-If you search for "pizza", you will only get rows that literally contain the word "pizza" in the text. Expressions like "Italian food" or "pasta dishes" will be missed, even though they describe related content.
+A `LIKE '%pizza%'` query only does exact substring matching.
+If you search for "pizza", you will only get rows that literally contain the word "pizza" in the text. 
+
+Expressions like "Italian food" or "pasta dishes" will be missed, even though they describe related content.
+
 With a vector index, we first turn each document into an embedding and do a nearest-neighbors search.
 That way we can retrieve chunks that are close in meaning to the question, not only those that repeat the same word.
 
