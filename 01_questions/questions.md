@@ -146,9 +146,15 @@ the difference is that chatbot just talks, while an agent can take action.
 
 > Answer:
 
-MCP (Model Context Protocol) defines how an AI assistant can discover and use tools provided by another program.
-This solves the problem of building a separate interface for every assistant and every tool. An MCP server lists the actions it supports, and the assistant can request one of those actions in the expected format.
-For example, a server could allow Copilot to list and read files in a project. Another server could connect it to GitHub so it can search issues or create a pull request.
+MCP is a standard that lets AI assistants discover and use tools from other programs in a consistent way.
+
+This solves the mess of building custom integrations for every tool. An MCP server advertises what it can do, and the assistant can request those actions in a standard format.
+
+Examples:
+
+A database server that lets the AI run queries and fetch data
+
+A web search server that lets it look up information online
 
 ---
 
