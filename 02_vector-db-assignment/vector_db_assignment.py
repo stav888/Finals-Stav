@@ -1,7 +1,7 @@
 """
 Semantic Book Search Example via ChromaDB & all-MiniLM-L6-v2
 """
-
+ 
 import chromadb
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
 
