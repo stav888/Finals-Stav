@@ -1,8 +1,5 @@
 """
 Semantic Book Search Example via ChromaDB & all-MiniLM-L6-v2
-
-Install:
-pip install -r requirements.txt / pip install chromadb sentence-transformers
 """
 
 import chromadb
