@@ -1,117 +1,85 @@
-# Task 4 — AI Chatbot Assistant + n8n
+# Task 4: AI Chatbot Assistant
 
-Restaurant AI Agent with n8n notifications.  
-Handles reservations, cancellations, menu questions, and opening hours.
-
-Built with **Python**, **Gradio**, **SQLite**, **OpenAI**, **Docker**, and **n8n**.
-
-Based on [Assignment 4 — Restaurant Agent + n8n](https://pythonai200425.github.io/finals/04-n8n-restaurant.html).
-
----
+An AI-powered restaurant reservation chatbot built with Python, Gradio, SQLite, OpenAI, Docker, and n8n. The assistant can answer restaurant questions, create reservations, cancel bookings, and send reservation events to an n8n workflow.
 
 ## Features
 
-- Natural-language reservation booking
-- LLM extraction of: `customer_name`, `date`, `time`, `party_size`, `contact`
-- Soft-delete cancellation by booking ID (`status = 'cancelled'`)
-- SQLite `reservations` table
-- Intent classifier: `reservation` | `cancellation` | `menu` | `hours` | `general`
-- OpenAI classification with keyword fallback
-- Webhook notifications on **booking and cancellation**
-- n8n workflow: Webhook → IF (by `event`) → two notification branches
-- Telegram notifications (bonus)
-- Gradio web chat UI
-
----
+- Natural-language reservation requests
+- Reservation details extraction: name, date, time, party size, and contact
+- Opening-hours validation before saving a booking
+- SQLite storage for reservations
+- Reservation cancellation by booking ID
+- Menu and opening-hours responses
+- OpenAI classification with a keyword-based fallback
+- n8n webhook notifications for reservations and cancellations
+- Gradio web chat interface
 
 ## Project Structure
 
 ```text
 04-n8n_docker/
-├── restaurant_chatbot.py   # Classifier, handlers, Gradio UI, _notify_n8n
-├── restaurant_db.py        # initialize_database, book/cancel/get helpers
+├── restaurant_chatbot.py   # Chatbot logic and Gradio interface
+├── restaurant_db.py        # SQLite database functions
+├── restaurant.db           # Local reservation database
 ├── n8n_workflow.json       # Importable n8n workflow
-├── docker-compose.yml      # Local n8n via Docker
-├── requirements.txt
-├── .env.example            # Environment template (no secrets)
-├── .gitignore
-├── README.md
-└── screenshots/            # Demo screenshots
+├── docker-compose.yml      # n8n Docker configuration
+├── requirements.txt        # Python dependencies
+├── env                     # Local environment variables
+└── README.md
 ```
-
-> `.env` and `restaurant.db` are local only (ignored by Git).
-
----
 
 ## Requirements
 
-- Python 3.10+
-- Docker Desktop (for n8n)
-- OpenAI API key
+- Python 3.10 or newer
+- Docker Desktop, for running n8n
+- An OpenAI API key
 
----
+## Installation
 
-## Setup
-
-### 1. Install dependencies
+Install the Python dependencies:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-### 2. Configure environment
-
-```powershell
-copy .env.example .env
-```
-
-Edit `.env`:
+Create or edit the local `env` file:
 
 ```env
-OPENAI_API_KEY=sk-your-openai-key-here
+OPENAI_API_KEY=your_openai_key
 OPENAI_MODEL=gpt-4o-mini
 N8N_WEBHOOK_URL=http://localhost:5678/webhook/restaurant
 RESTAURANT_DB=restaurant.db
 ```
 
-**Do not commit `.env`.**
-
----
+The `env` file contains secrets and should not be committed.
 
 ## Run n8n
+
+Start the n8n container:
 
 ```powershell
 docker compose up -d
 ```
 
-1. Open [http://localhost:5678](http://localhost:5678)
-2. Import `n8n_workflow.json`
-3. Activate / publish the workflow
+Open n8n at [http://localhost:5678](http://localhost:5678), import `n8n_workflow.json`, and publish or activate the workflow.
 
-Webhook used by the chatbot:
+The webhook endpoint used by the chatbot is:
 
 ```text
 POST http://localhost:5678/webhook/restaurant
 ```
 
-n8n flow:
-
-1. **Webhook** node — method `POST`, path `restaurant`
-2. **IF** node — splits on `event == reservation`
-3. **Two branches** — different messages for reservation vs cancellation
-4. **Respond to Webhook** (+ Telegram as bonus)
-
----
-
 ## Run the Chatbot
+
+From the task directory, run:
 
 ```powershell
 python restaurant_chatbot.py
 ```
 
-Open: [http://127.0.0.1:7860](http://127.0.0.1:7860)
+Open the Gradio interface at [http://127.0.0.1:7860](http://127.0.0.1:7860).
 
-### Example messages
+Example messages:
 
 ```text
 Order table for Lina at 19:55 tonight for 4
@@ -120,76 +88,68 @@ What do you have for dessert?
 What time are you open?
 ```
 
----
+Clicking an example fills the message box. Press **Enter** or click **Submit** to send it.
 
 ## How It Works
 
-1. User sends a message in Gradio
-2. `classify_question()` routes to: `reservation` / `cancellation` / `menu` / `hours` / `general`
-3. `_handle_reservation()` extracts details (LLM → JSON) and validates required fields
-4. `book_reservation()` saves to SQLite and returns the booking ID
-5. `_notify_n8n(data, event="reservation")` POSTs JSON to n8n
-6. For cancellations: extract booking ID → `cancel_reservation()` → `_notify_n8n(..., event="cancellation")`
-7. n8n IF node routes by `event` and sends the matching notification
+1. The user sends a message through the Gradio chat interface.
+2. The chatbot classifies the request as a reservation, cancellation, menu, hours, or general question.
+3. Reservation details are extracted and validated.
+4. Valid reservations are saved to SQLite and assigned a booking ID.
+5. The chatbot sends a JSON event to the n8n webhook.
+6. n8n routes the event and sends the configured notification.
 
-### Reservation payload example
+Reservation event example:
 
 ```json
 {
-  "event": "reservation",
-  "id": 42,
-  "customer_name": "Lina",
-  "date": "2026-08-01",
-  "time": "19:55",
-  "party_size": 4
+	"event": "reservation",
+	"id": 42,
+	"customer_name": "Lina",
+	"date": "2026-08-01",
+	"time": "19:55",
+	"party_size": 4
 }
 ```
 
-Cancellation uses the same webhook with `"event": "cancellation"`.
+Cancellation events use the same webhook with `"event": "cancellation"`.
 
----
+## Testing the Webhook
 
-## Test the Webhook (PowerShell)
-
-**Reservation**
+Reservation test:
 
 ```powershell
-$body = '{"event":"reservation","customer_name":"Stav","date":"2026-08-01","time":"19:30","party_size":4,"id":102}'
+$body = '{"event":"reservation","customer_name":"Stav","date":"2026-08-01","time":"19:30","party_size":4,"contact":"050-1234567","id":102}'
 Invoke-WebRequest -Uri "http://localhost:5678/webhook/restaurant" -Method POST -ContentType "application/json" -Body $body
 ```
 
-**Cancellation**
+Cancellation test:
 
 ```powershell
 $body = '{"event":"cancellation","id":102}'
 Invoke-WebRequest -Uri "http://localhost:5678/webhook/restaurant" -Method POST -ContentType "application/json" -Body $body
 ```
 
----
-
 ## Screenshots
 
-### Gradio — AI Chatbot Assistant
+### Gradio Chat Interface
 
-<img width="576" height="1280" alt="AI Chatbot Assistant interface" src="https://github.com/user-attachments/assets/791a6ea5-9138-41b0-8cad-9a174871a5e1" />
+![Restaurant chatbot interface](https://github.com/user-attachments/assets/212cc857-8977-4718-ac73-a7c87aff3da0)
 
-![Chat interface](screenshots/gradio1.png)
+![Restaurant chatbot conversation](https://github.com/user-attachments/assets/afef9c2f-94ba-49a3-80f4-f639d8b7097b)
 
-![Reservation confirmed](screenshots/gradio2.png)
-
-![Cancellation](screenshots/gradio3.png)
+![Reservation assistant response](https://github.com/user-attachments/assets/77553e80-2ce6-4ca2-895f-bacad42e581c)
 
 ### n8n Workflow
 
-![Workflow overview](screenshots/n8n.png)
+![n8n workflow overview](https://github.com/user-attachments/assets/a8560451-8292-4458-9832-94a3cd126430)
 
-![Execution test](screenshots/n8n_Test1.png)
+![n8n workflow configuration](https://github.com/user-attachments/assets/29f5d156-8658-4291-919d-b2238775243d)
 
----
+![n8n notification workflow](https://github.com/user-attachments/assets/bdc0d55d-e3c2-408a-9301-0cb6baa310ea)
 
-## Security Notes
+![Telegram](https://github.com/user-attachments/assets/bdc0d55d-e3c2-408a-9301-0cb6baa310ea)
 
-- Keep API keys only in `.env`
-- `.gitignore` excludes: `.env`, `env`, `*.db`, `__pycache__/`, `.venv/`, logs, n8n runtime data
-- Share `.env.example` only (never real secrets)
-```
+## Security and Local Files
+
+The task `.gitignore` excludes the local environment file, SQLite databases, Gradio logs, Python caches, and n8n runtime data. Keep API keys and webhook credentials in `env` only.
