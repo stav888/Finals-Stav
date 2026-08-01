@@ -136,19 +136,19 @@ Invoke-WebRequest -Uri "http://localhost:5678/webhook/restaurant" -Method POST -
 
 ![Gradio order_cancel](https://github.com/user-attachments/assets/29f5d156-8658-4291-919d-b2238775243d)
 
-![Reservation assistant response](https://github.com/user-attachments/assets/77553e80-2ce6-4ca2-895f-bacad42e581c)
+![Terminal](https://github.com/user-attachments/assets/212cc857-8977-4718-ac73-a7c87aff3da0)
 
 ### n8n Workflow
 
 ![n8n notification workflow](https://github.com/user-attachments/assets/bdc0d55d-e3c2-408a-9301-0cb6baa310ea)
 
-![n8n order](https://github.com/user-attachments/assets/afef9c2f-94ba-49a3-80f4-f639d8b7097b)
+![n8n order](https://github.com/user-attachments/assets/77553e80-2ce6-4ca2-895f-bacad42e581c)
 
-![n8n cancel](https://github.com/user-attachments/assets/212cc857-8977-4718-ac73-a7c87aff3da0)
+![n8n cancel](https://github.com/user-attachments/assets/afef9c2f-94ba-49a3-80f4-f639d8b7097b)
 
 ![DB](https://github.com/user-attachments/assets/a8560451-8292-4458-9832-94a3cd126430)
 
-![Telegram](https://github.com/user-attachments/assets/bdc0d55d-e3c2-408a-9301-0cb6baa310ea)
+![Telegram](https://github.com/user-attachments/assets/791a6ea5-9138-41b0-8cad-9a174871a5e1)
 
 ## Security and Local Files
 
