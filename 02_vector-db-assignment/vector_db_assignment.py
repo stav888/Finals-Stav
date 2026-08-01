@@ -1,5 +1,6 @@
 """
 Semantic Book Search Example via ChromaDB & all-MiniLM-L6-v2
+
 """
 
 import chromadb
