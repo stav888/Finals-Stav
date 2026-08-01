@@ -77,7 +77,6 @@ def cancel_reservation(db_path: str, reservation_id: int) -> bool:
         )
         return cursor.rowcount > 0
 
-
 def get_reservations(db_path: str, customer_name: str = None) -> List[Dict]:
     """Return confirmed reservations (optionally filtered by name)."""
     with sqlite3.connect(db_path) as conn:
