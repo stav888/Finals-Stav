@@ -17,6 +17,7 @@ from chatbot_db import (
     get_reservations,
 )
 
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 for name in ("env", ".env"):
     p = os.path.join(base_dir, name)
