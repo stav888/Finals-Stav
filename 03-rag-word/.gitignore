@@ -7,7 +7,7 @@ venv/
 env/
 __pycache__/
 *.py[cod]
-
+ 
 # Generated RAG/vector-store data
 chroma_docx_db/
 
