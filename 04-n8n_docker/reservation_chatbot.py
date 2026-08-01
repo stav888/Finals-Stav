@@ -17,7 +17,6 @@ from chatbot_db import (
     get_reservations,
 )
 
-# 🔥 ROBUST ENV LOADING: try both 'env' and '.env'
 base_dir = os.path.dirname(os.path.abspath(__file__))
 for name in ("env", ".env"):
     p = os.path.join(base_dir, name)
@@ -360,7 +359,7 @@ class RestaurantChatbot:
         if not webhook_url:
             print("⚠️  No N8N_WEBHOOK_URL configured in .env")
             return
-        # 🔥 Ensure 'event' is included in the payload so n8n IF node can route
+        # Ensure 'event' is included in the payload so n8n IF node can route
         payload = {**data, "event": event}
 
         try:
