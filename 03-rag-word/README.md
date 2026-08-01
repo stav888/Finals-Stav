@@ -136,27 +136,27 @@ Answers are grounded in the document — not general LLM knowledge.
 
 ### Terminal — 5 questions + answers + context
 
-![Terminal output 1](https://github.com/user-attachments/assets/1455bd42-3f9d-4a75-be02-6065b1ec2270)
+![Terminal output 1 - answer what](https://github.com/user-attachments/assets/1455bd42-3f9d-4a75-be02-6065b1ec2270)
 
-![Terminal output 2](https://github.com/user-attachments/assets/77af1b3c-9636-45b5-bbe7-ef2ff2cb126a)
+![Terminal output 2 - q3](https://github.com/user-attachments/assets/77af1b3c-9636-45b5-bbe7-ef2ff2cb126a)
 
-![Terminal output 3](https://github.com/user-attachments/assets/b7827eb1-1f1a-4538-9180-518c230bc32b)
+![Terminal output 3 - q4](https://github.com/user-attachments/assets/b7827eb1-1f1a-4538-9180-518c230bc32b)
 
-![Terminal output 4](https://github.com/user-attachments/assets/9819e90c-f35f-4a59-a1d2-cb540b79ed8e)
+![Terminal output 4 - q5](https://github.com/user-attachments/assets/9819e90c-f35f-4a59-a1d2-cb540b79ed8e)
 
-![Terminal output 5](https://github.com/user-attachments/assets/d4e0c794-30d8-46ae-b57c-cba93fe9ed01)
+![Terminal output 5 - Gradio](https://github.com/user-attachments/assets/d4e0c794-30d8-46ae-b57c-cba93fe9ed01)
 
 ### Gradio UI
 
-![Gradio chat 1](https://github.com/user-attachments/assets/17921707-7043-4d7c-8029-9404312ddaa7)
+![Gradio chat 1 - q1](https://github.com/user-attachments/assets/17921707-7043-4d7c-8029-9404312ddaa7)
 
-![Gradio chat 2](https://github.com/user-attachments/assets/59497e61-8208-4b8e-a271-43f9093871c3)
+![Gradio chat 2 - q2](https://github.com/user-attachments/assets/59497e61-8208-4b8e-a271-43f9093871c3)
 
-![Gradio chat 3](https://github.com/user-attachments/assets/7ae7bcc9-ac5b-48f4-94d2-28baeed8d7b8)
+![Gradio chat 3 - summary](https://github.com/user-attachments/assets/7ae7bcc9-ac5b-48f4-94d2-28baeed8d7b8)
 
-![Gradio chat 4](https://github.com/user-attachments/assets/55f09640-74c8-41c4-888a-8c7ac7f60088)
+![Gradio chat 4 - answer summary](https://github.com/user-attachments/assets/55f09640-74c8-41c4-888a-8c7ac7f60088)
 
-![Gradio chat 5](https://github.com/user-attachments/assets/358cfd3b-bd52-4141-b89d-bcf277ebb269)
+![Gradio chat 5 - what](https://github.com/user-attachments/assets/358cfd3b-bd52-4141-b89d-bcf277ebb269)
 
 ---
 
