@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from restaurant_db import (
+from chatbot_db import (
     initialize_database,
     book_reservation,
     cancel_reservation,
