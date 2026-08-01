@@ -375,38 +375,51 @@ class RestaurantChatbot:
 
 if __name__ == "__main__":
     import gradio as gr
+
     bot = RestaurantChatbot()
 
-    def chat_submit(message, history):
-        if not message or not message.strip():
+    def respond(message, history):
+        """Chat submit: append user + assistant messages (messages format)."""
+        history = history or []
+        if not message or not str(message).strip():
             return history, ""
         reply = bot.answer(message)
-        history = history or []
-        history.append({"role": "user", "content": message})
-        history.append({"role": "assistant", "content": reply})
+        history = history + [
+            {"role": "user", "content": message},
+            {"role": "assistant", "content": reply},
+        ]
         return history, ""
 
     with gr.Blocks(title="AI Chatbot Assistant") as demo:
-        gr.Markdown("A restaurant booking assistant integrated with n8n and Telegram for reservation and cancellation workflows.")
-        chatbot = gr.Chatbot(height=500)
-        textbox = gr.Textbox(placeholder="Type your message here...", lines=1, max_lines=1, show_label=False)
-
-        with gr.Row():
-            submit_btn = gr.Button("Send")
-
-        submit_btn.click(chat_submit, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
-        textbox.submit(chat_submit, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
-
-        # Examples placed below controls. Clicking will populate the textbox but NOT auto-submit.
-        gr.Examples(
-            examples=[
-                "Order table for Lina at 19:55 tonight for 4",
-                "Cancel reservation 5",
-                "What do you have for dessert?",
-            ],
-            inputs=[textbox],
-            label="Examples (click to populate, then press Send to confirm)",
-            cache_examples=False,
+        gr.Markdown("# AI Chatbot Assistant")
+        gr.Markdown(
+            "Reserve a table, cancel a booking, or ask about our menu and opening hours."
         )
+
+        chatbot = gr.Chatbot(height=500, type="messages")
+        with gr.Row():
+            textbox = gr.Textbox(
+                placeholder="Type a message...",
+                show_label=False,
+                scale=7,
+                container=False,
+            )
+            submit_btn = gr.Button("Submit", scale=1)
+
+        gr.Markdown("### Examples (click one to fill the message box)")
+        example_messages = [
+            "Order table for Lina at 19:55 tonight for 4",
+            "Cancel reservation number 5",
+            "What do you have for dessert?",
+        ]
+        for example_message in example_messages:
+            gr.Button(example_message).click(
+                lambda message=example_message: message,
+                outputs=textbox,
+                show_api=False,
+            )
+
+        submit_btn.click(respond, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
+        textbox.submit(respond, inputs=[textbox, chatbot], outputs=[chatbot, textbox])
 
     demo.launch(share=False, server_name="127.0.0.1", server_port=7860)
