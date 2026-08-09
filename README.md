@@ -175,7 +175,7 @@ python reservation_chatbot_app.py
 ## Author
 
 **Stav Kesler** · AI / ML / Data Science portfolio project
- 
+
 ---
 ## Submission
 
