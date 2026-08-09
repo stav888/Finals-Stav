@@ -1,66 +1,177 @@
-# Finals-Stav
+# Finals-Stav — AI Advanced Final Assignments
 
-Finals-Stav contains the final assignments for the course. The repository holds the written theory answers, code for the practical assignments (vector DB, RAG, and a restaurant chatbot wired with n8n), and helper tools to export and regenerate deliverables.
+Complete submission for **Final Assignments — AI Advanced**  
+Course page: [pythonai200425.github.io/finals](https://pythonai200425.github.io/finals/index.html)
 
-Table of contents
-- `01_questions/` — Assignment 1 (theory): canonical answers plus `assignment_1_answers.pdf` and `assignment_1_answers.docx`.
-- `02-vector-db-assignment/` — Assignment 2: ChromaDB/embeddings examples and scripts.
-- `03-rag-word_copy/` — Assignment 3: RAG pipeline using a Word document and ChromaDB/chat interface.
-- `04-n8n_docker/` — Assignment 4: Restaurant chatbot, SQLite DB, and n8n workflow for notifications.
-- `tools/` — utility scripts used to convert markdown to DOCX/PDF and other helpers.
+**Total: 104 points** across 4 assignments covering theory, vector databases, RAG, and a full restaurant AI agent with n8n automation.
 
-Assignments (summary)
+---
 
-- Assignment 1 — Theory (12 questions, 24 points)
-	- Topics: tokenization, TF-IDF, embeddings, cosine similarity, vector indexes, RAG, Docker, AI agents, MCP, and Agent Skills.
-	- Deliverable: a single PDF or DOCX containing answers to all 12 questions.
+## Assignments Overview
 
-- Assignment 2 — Build a Vector Database (20 points)
-	- Create a ChromaDB collection with at least 15 documents, run semantic queries, and include a script (`.py` or `.ipynb`) plus a screenshot showing query results and similarity scores.
+| # | Assignment | Folder | Points | Status |
+|---|------------|--------|--------|--------|
+| 1 | [Theory Questions](https://pythonai200425.github.io/finals/01-theory.html) | `01_questions/` | 24 | Written answers (12 questions) |
+| 2 | [Vector Database](https://pythonai200425.github.io/finals/02-vector-db.html) | `02_vector-db-assignment/` | 20 | ChromaDB + semantic queries |
+| 3 | [RAG with Word Document](https://pythonai200425.github.io/finals/03-rag-word.html) | `03-rag-word/` | 20 | LangChain RAG + Gradio |
+| 4 | [Restaurant AI Agent + n8n](https://pythonai200425.github.io/finals/04-n8n-restaurant.html) | `04-n8n_docker/` | 40 | Chatbot + SQLite + n8n + Telegram |
 
-- Assignment 3 — RAG with a Word Document (20 points)
-	- Convert a `.docx` into chunks, embed them into a vector store (ChromaDB), and implement a chat interface that retrieves and answers questions using the document context. Deliver code and a screenshot showing retrieval → generated answer.
+---
 
-- Assignment 4 — Restaurant AI Agent + n8n Notifications (40 points)
-	- Extend the restaurant chatbot to handle reservations and cancellations stored in SQLite, and wire an n8n workflow that sends notifications (email, console, or other). Deliver Python files, n8n workflow screenshot, and demo screenshot.
+## Repository Structure
 
-Submission checklist
-
-1. Theory answers document: one PDF or DOCX containing all 12 answers.
-2. Vector DB: Python file or notebook plus a screenshot showing query results with distances.
-3. RAG: Python file or notebook plus a screenshot demonstrating retrieval and answer flow.
-4. Restaurant chatbot: Python files, n8n workflow screenshot, and a screenshot of notification output.
-
-Send all files to: pythonai200425+finals@gmail.com with subject `Finals – [Your Full Name]`.
-
-Tips
-
-- Read each assignment's demo page before starting — demos include working examples and expected outputs.
-- Assignment 4 includes a free option that does not require external accounts.
-- For the RAG assignment any `.docx` works; pick a document that interests you.
-
-Regenerating deliverables
-
-To regenerate the PDF from the canonical markdown answers, activate the venv and run:
-
-```powershell
-.venv\Scripts\Activate.ps1
-python tools\md_to_pdf_reportlab.py
+```text
+Finals-Stav/
+├── 01_questions/
+│   └── Questions & Answers.pdf
+├── 02_vector-db-assignment/
+│   ├── README.md
+│   ├── image1.png
+│   ├── image2.png
+│   ├── requirements.txt
+│   └── vector_db_assignment.py
+├── 03-rag-word/
+│   ├── screenshots/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── ML_Concepts_English.docx
+│   ├── RAG.py
+│   ├── README.md
+│   └── requirements.txt
+├── 04-n8n_docker/
+│   ├── screenshots/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── README.md
+│   ├── chatbot_db.py
+│   ├── docker-compose.yml
+│   ├── n8n_workflow.json
+│   ├── requirements.txt
+│   ├── reservation_chatbot_app.py
+│   └── restaurant.db
+└── README.md
 ```
 
-To regenerate the DOCX:
+Each task folder has its own `README.md` with setup and run instructions.
+
+---
+
+## Assignment 1 — Theory Questions (24 pts)
+
+12 conceptual questions on:
+
+- Tokenization, stemming / lemmatization, TF-IDF  
+- Sentence embeddings, cosine similarity  
+- Vector indexes vs SQL  
+- RAG pipeline, Docker image vs container  
+- AI agents with tools, MCP, Agent Skills  
+
+**Deliverable:** `Questions & Answers.pdf`
+
+📁 Folder: [`01_questions/`](./01_questions/)
+
+---
+
+## Assignment 2 — Vector Database (20 pts)
+
+- ChromaDB collection with **≥ 15 documents** + metadata  
+- Free local model: `all-MiniLM-L6-v2`  
+- **5 semantic queries** (concepts, not keyword copies)  
+- L2 **distances** printed for each result  
+- Short written **analysis** of results  
 
 ```powershell
-.venv\Scripts\Activate.ps1
-python tools\convert_md_to_docx.py
+cd 02_vector-db-assignment
+pip install -r requirements.txt
+python vector_db_assignment.py
 ```
 
-Notes about this repository
+📁 Folder: [`02_vector-db-assignment/`](./02_vector-db-assignment/)
 
-- The canonical answers are in `01_questions/combined_answers.md`.
-- `04-n8n_docker/README.md` was updated to avoid referencing `.env.example` and Telegram environment variables.
-- If you plan to version-control these artifacts, initialize a Git repository at the workspace root (`git init`) and commit the outputs.
+---
 
-Further edits
+## Assignment 3 — RAG with Word Document (20 pts)
 
-If you want a polished README with a title page, badges, or a contributor guide, say which additions you want and I will update it.
+- Load `.docx` → chunk → embed → store in ChromaDB  
+- Answer **5 non-trivial questions** with LLM  
+- Print **answer + retrieved context** for each question  
+- Optional Gradio UI for interactive chat  
+
+```powershell
+cd 03-rag-word
+pip install -r requirements.txt
+copy .env.example .env   # add OPENAI_API_KEY
+python RAG.py
+```
+
+📁 Folder: [`03-rag-word/`](./03-rag-word/)
+
+---
+
+## Assignment 4 — Restaurant AI Agent + n8n (40 pts)
+
+- SQLite `reservations` table + `book_reservation` / `cancel_reservation`  
+- Classifier: `reservation` | `cancellation` | `menu` | `hours` | `general`  
+- LLM extraction of name / date / time / party size  
+- Webhook to n8n on **booking and cancellation**  
+- n8n: Webhook → IF (by `event`) → two notification branches  
+- Bonus: Telegram real notifications  
+
+```powershell
+cd 04-n8n_docker
+pip install -r requirements.txt
+copy .env.example .env
+docker compose up -d
+# Import n8n_workflow.json and activate
+python reservation_chatbot_app.py
+```
+
+📁 Folder: [`04-n8n_docker/`](./04-n8n_docker/)
+
+---
+
+## Grading Summary
+
+| Assignment | Max | Focus |
+|------------|-----|--------|
+| 1 — Theory | 24 | NLP, vectors, RAG, agents concepts |
+| 2 — Vector DB | 20 | Embeddings, semantic search, analysis |
+| 3 — RAG Word | 20 | Full RAG pipeline on a document |
+| 4 — Agent + n8n | 40 | Agent + DB + webhooks + automation |
+| **Total** | **104** | |
+
+---
+
+## Tech Stack
+
+| Area | Tools |
+|------|--------|
+| NLP / Theory | Concepts only (Assignment 1) |
+| Vector search | ChromaDB, Sentence Transformers |
+| RAG | LangChain, OpenAI Embeddings, Gradio |
+| Agent | LangChain, SQLite, Gradio |
+| Automation | n8n (Docker), webhooks, Telegram |
+
+---
+
+## Environment & Security
+
+- Secrets live only in local `.env` files (never committed)
+- Each coding task includes `.env.example` and `.gitignore`
+- Local DB / Chroma folders are ignored by Git
+
+---
+
+## Quick Links
+
+- Course finals hub: https://pythonai200425.github.io/finals/index.html  
+- Task 1: https://pythonai200425.github.io/finals/01-theory.html  
+- Task 2: https://pythonai200425.github.io/finals/02-vector-db.html  
+- Task 3: https://pythonai200425.github.io/finals/03-rag-word.html  
+- Task 4: https://pythonai200425.github.io/finals/04-n8n-restaurant.html  
+
+---
+
+## Author
+
+**Stav Kesler** · AI / ML / Data Science portfolio project
