@@ -22,29 +22,34 @@ Course page: [pythonai200425.github.io/finals](https://pythonai200425.github.io/
 
 ```text
 Finals-Stav/
-├── 01_questions/                 # Assignment 1 — Theory
-│   ├── combined answers / DOCX
-│   └── …
-├── 02_vector-db-assignment/      # Assignment 2 — Vector DB
-│   ├── vector_db_assignment.py
+├── 01_questions/
+│   └── Questions & Answers.pdf
+├── 02_vector-db-assignment/
+│   ├── README.md
+│   ├── image1.png
+│   ├── image2.png
 │   ├── requirements.txt
-│   ├── image1.png / image2.png
-│   └── README.md
-├── 03-rag-word/                  # Assignment 3 — RAG
-│   ├── RAG.py
+│   └── vector_db_assignment.py
+├── 03-rag-word/
+│   ├── screenshots/
+│   ├── .env.example
+│   ├── .gitignore
 │   ├── ML_Concepts_English.docx
-│   ├── requirements.txt
+│   ├── RAG.py
+│   ├── README.md
+│   └── requirements.txt
+├── 04-n8n_docker/
+│   ├── screenshots/
 │   ├── .env.example
-│   └── README.md
-├── 04-n8n_docker/                # Assignment 4 — Agent + n8n
-│   ├── reservation_chatbot_app.py
+│   ├── .gitignore
+│   ├── README.md
 │   ├── chatbot_db.py
-│   ├── n8n_workflow.json
 │   ├── docker-compose.yml
+│   ├── n8n_workflow.json
 │   ├── requirements.txt
-│   ├── .env.example
-│   └── README.md
-└── README.md                     # This file
+│   ├── reservation_chatbot_app.py
+│   └── restaurant.db
+└── README.md
 ```
 
 Each task folder has its own `README.md` with setup and run instructions.
@@ -61,7 +66,7 @@ Each task folder has its own `README.md` with setup and run instructions.
 - RAG pipeline, Docker image vs container  
 - AI agents with tools, MCP, Agent Skills  
 
-**Deliverable:** PDF or DOCX with answers in your own words.
+**Deliverable:** `Questions & Answers.pdf`
 
 📁 Folder: [`01_questions/`](./01_questions/)
 
