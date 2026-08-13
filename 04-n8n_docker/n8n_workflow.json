@@ -30,7 +30,7 @@
           "conditions": [
             {
               "id": "cond-event",
-              "leftValue": "={{ $json.event }}",
+              "leftValue": "={{ $json.body.event }}",
               "rightValue": "reservation",
               "operator": {
                 "type": "string",
