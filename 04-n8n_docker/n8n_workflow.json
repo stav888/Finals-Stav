@@ -88,7 +88,7 @@
     {
       "parameters": {
         "chatId": "509252065",
-        "text": "=❌ *Reservation Cancelled*\n\n🆔 Booking #{{ $json.id }}\n\nThe reservation has been cancelled.",
+        "text": "=❌ *Reservation Cancelled*\n\n🆔 Booking #{{ $json.body.id }}\n\nThe reservation has been cancelled.",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
@@ -110,7 +110,7 @@
     {
       "parameters": {
         "chatId": "509252065",
-        "text": "=🍽 *New Reservation*\n\n👤 Name: {{ $json.customer_name }}\n📅 Date: {{ $json.date }}\n🕐 Time: {{ $json.time }}\n👥 Party: {{ $json.party_size }}\n📞 Contact: {{ $json.contact || \"N/A\" }}\n🆔 Booking #{{ $json.id }}",
+        "text": "=🍽 *New Reservation*\n\n👤 Name: {{ $json.body.customer_name }}\n📅 Date: {{ $json.body.date }}\n🕐 Time: {{ $json.body.time }}\n👥 Party: {{ $json.body.party_size }}\n📞 Contact: {{ $json.body.contact || \"N/A\" }}\n🆔 Booking #{{ $json.body.id }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
