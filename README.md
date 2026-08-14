@@ -1,4 +1,4 @@
-# Finals-Stav kesler — AI Advanced Final Assignments
+# Finals-Stav Kesler — AI Advanced Final Assignments
 
 Complete submission for **Final Assignments — AI Advanced**  
 Course page: [pythonai200425.github.io/finals](https://pythonai200425.github.io/finals/index.html)
